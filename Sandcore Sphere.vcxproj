@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{def54a0a-02c1-4cbe-a96f-cc2f9d27e9b1}</ProjectGuid>
+    <RootNamespace>SandcoreSphere</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\stb\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\fastnoise\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\stb\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\fastnoise\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\stb\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\fastnoise\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\stb\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\fastnoise\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Sandcore\Engine\Common\Array\Array2D.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Array\Array3D.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Clock\Clock.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Print\Print.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector2D.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector2DHash.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector3D.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector3DHash.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Canvas\Canvas.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Debug\Debug.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Drawable\Drawable.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Framebuffer\Framebuffer.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Mesh\Mesh.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Program\Program.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Program\Shader.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture2D.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture3D.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\TextureCubemap.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Vertex\Vertex.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\Geometry.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Optional\GLMSupport\Vector3DGLM.ixx" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\Memory.ixx" />
+    <ClCompile Include="Source\Planet\Display\Display.ixx" />
+    <ClCompile Include="Source\Planet\Display\DisplayElevation.ixx" />
+    <ClCompile Include="Source\Planet\Display\DisplayPrecipitation.ixx" />
+    <ClCompile Include="Source\Planet\Display\DisplayTemperature.ixx" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
