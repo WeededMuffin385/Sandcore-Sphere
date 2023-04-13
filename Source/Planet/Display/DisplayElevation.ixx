@@ -1,5 +1,5 @@
 module;
-#include <FastNoiseLite.h>
+#include <FastNoise.h>
 #include <numbers>
 #include <random>
 export module Sandcore.Planet.Display.Elevation;
@@ -18,46 +18,35 @@ export namespace Sandcore {
 			noiseContinental.SetSeed(dist(random));
 			noiseMountain.SetSeed(dist(random));
 
-			noiseContinental.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
-			noiseMountain.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+			noiseContinental.SetNoiseType(FastNoise::NoiseType::SimplexFractal);
+			noiseMountain.SetNoiseType(FastNoise::NoiseType::SimplexFractal);
 			
-			noiseContinental.SetFractalType(FastNoiseLite::FractalType_FBm);
-			noiseMountain.SetFractalType(FastNoiseLite::FractalType_FBm);
+			noiseContinental.SetFractalType(FastNoise::FractalType::FBM);
+			noiseMountain.SetFractalType(FastNoise::FractalType::FBM);
 
 			noiseContinental.SetFractalOctaves(13);
 			noiseMountain.SetFractalOctaves(7);
 
 			noiseContinental.SetFrequency(0.7f);
-			noiseMountain.SetFrequency(0.0005f);
+			noiseMountain.SetFrequency(1.35f);
 		}
 
-		virtual void generate() {
-			for (int n = 0; n < 6; ++n) {
-				for (int j = 0; j < length; ++j) {
-					for (int i = 0; i < length; ++i) {
-						double U = ((double)i / length) * 2 - 1;
-						double V = ((double)j / length) * 2 - 1;
-						auto cart = cubeToCart(U, V, (cube_faces)n);
 
-						double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
-						double theta = std::atan2(cart.y, cart.x);
-						double phi = std::acos(cart.z / r);
-
-						float continent = noiseContinental.GetNoise(cart.x / r, cart.y / r, cart.z / r) * 150;
-						float mountain = 0;
-
-						if (continent > 0) mountain = noiseMountain.GetNoise(cart.x / r, cart.y / r, cart.z / r) - 0.5f;
-						if (mountain < 0) mountain = 0; else mountain *= 1;
-
-						float elevation = continent +mountain;
-
-						cubemap[n](i, j) = elevation;
-					}
-				}
-			}
-		}
 	protected:
-		FastNoiseLite noiseContinental;
-		FastNoiseLite noiseMountain;
+		virtual void create(int x, int y, int z) {
+			double u = ((double)x / length) * 2 - 1;
+			double v = ((double)y / length) * 2 - 1;
+			auto cart = cubeToCart(u, v, z);
+
+			double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
+			double theta = std::atan2(cart.y, cart.x);
+			double phi = std::acos(cart.z / r);
+
+			float continent = noiseContinental.GetNoise(cart.x / r, cart.y / r, cart.z / r);
+			operator()(x, y, z) = continent;
+		}
+	public:
+		FastNoise noiseContinental;
+		FastNoise noiseMountain;
 	};
 }

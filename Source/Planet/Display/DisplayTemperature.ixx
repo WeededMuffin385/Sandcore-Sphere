@@ -14,40 +14,23 @@ export namespace Sandcore {
 		DisplayTemperature(std::size_t length, DisplayElevation& elevation, DisplayPrecipitation& precipitation) : Display(length), elevation(elevation), precipitation(precipitation) {
 		}
 
-		virtual void generate() {
-			if (!elevation.generated) elevation.generate();
-			if (!precipitation.generated) precipitation.generate();
+	protected:
+		virtual void create(int x, int y, int z) {
+			double u = ((double)x / length) * 2 - 1;
+			double v = ((double)y / length) * 2 - 1;
+			auto cart = cubeToCart(u, v, z);
 
-			for (int n = 0; n < SIZE; ++n) {
-				for (int j = 0; j < length; ++j) {
-					for (int i = 0; i < length; ++i) {
-						double U = ((double)i / length) * 2 - 1;
-						double V = ((double)j / length) * 2 - 1;
-						auto cart = cubeToCart(U, V, (cube_faces)n);
+			double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
+			double theta = std::atan2(cart.y, cart.x);
+			double phi = std::acos(cart.z / r);
 
-						double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
-						double theta = std::atan2(cart.y, cart.x);
-						double phi = std::acos(cart.z / r);
+			float t = std::sin(phi) * 2 - 1;
+			float h = elevation(x, y, z);
+			if (h > 0) t -= h * 0.5;
+			if (h < 0) t /= 3;
 
-						float delta = max - min;
-
-						float t = std::sin(phi) * delta + min;
-						float h = elevation[n](i, j);
-
-						if (h <= 0) t /= 3;
-						if (h > 0) t -= h / 100 * 5.f;
-
-						t *= (1.5 - precipitation[n](i, j));
-
-						cubemap[n](i, j) = t;
-					}
-				}
-			}
+			operator()(x, y, z) = t;
 		}
-
-	private:
-		float min = -20;
-		float max = +30;
 
 		DisplayElevation& elevation;
 		DisplayPrecipitation& precipitation;

@@ -21,9 +21,6 @@
     <ClCompile Include="Source\Memory.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\Geometry.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Planet\Display\Display.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -121,6 +118,42 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Optional\GLMSupport\Vector3DGLM.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Drawing.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\GeometryClear.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Planet\Display\DisplayIce.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Planet\Planet.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Application.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Planet\Display\DisplayDesert.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Planet\Display\DisplayWaterway.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Planet\Display\DisplayWaterway.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandcore\Engine\Libraries\fastnoise\include\FastNoise.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Clouds\Clouds.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Clouds\DisplayClouds.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandcore\Engine\Common\Timer\Timer.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

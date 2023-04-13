@@ -5,36 +5,37 @@ module;
 export module Sandcore.Planet.Display.Precipitation;
 
 import Sandcore.Planet.Display;
-import Sandcore.Vector3D;
+
+import Sandcore.Planet.Display.Elevation;
+
+import Sandcore.Print;
 
 export namespace Sandcore {
 	class DisplayPrecipitation : public Display {
 	private:
 		int cells = 6;
+		int radius = 4;
 	public:
-		DisplayPrecipitation(int length) : Display(length) {
+		DisplayPrecipitation(int length, DisplayElevation& elevation) : Display(length), elevation(elevation) {
 
 		}
+	protected:
 
-		virtual void generate() {
-			for (int n = 0; n < 6; ++n) {
-				for (int j = 0; j < length; ++j) {
-					for (int i = 0; i < length; ++i) {
-						double U = ((double)i / length) * 2 - 1;
-						double V = ((double)j / length) * 2 - 1;
-						auto cart = cubeToCart(U, V, (cube_faces)n);
+		virtual void create(int x, int y, int z) {
+			double u = ((double)x / length) * 2 - 1;
+			double v = ((double)y / length) * 2 - 1;
+			auto cart = cubeToCart(u, v, z);
 
-						double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
-						double theta = std::atan2(cart.y, cart.x);
-						double phi = std::acos(cart.z / r);
+			double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
+			double theta = std::atan2(cart.y, cart.x);
+			double phi = std::acos(cart.z / r);
 
-						cubemap[n](i, j) = std::cos((phi - std::numbers::pi * 0.5) * cells);
+			operator()(x, y, z) = std::cos((phi - std::numbers::pi * 0.5) * cells);
 
-						double latitude = phi / std::numbers::pi;
-						if (latitude <= 0.25 || latitude >= 0.75) if (cubemap[n](i, j) > 0) cubemap[n](i, j) *= 0.5;
-					}
-				}
-			}
+			double latitude = phi / std::numbers::pi;
+			if (latitude <= 0.25 || latitude >= 0.75) if (operator()(x, y, z) > 0) operator()(x, y, z) *= 0.75;
 		}
+
+		DisplayElevation& elevation;
 	};
 }

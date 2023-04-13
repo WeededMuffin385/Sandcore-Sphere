@@ -149,6 +149,7 @@
     <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.cpp" />
     <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Print\Print.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Timer\Timer.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector2D.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector2DHash.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector3D.ixx" />
@@ -171,14 +172,24 @@
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.cpp" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\Geometry.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Libraries\fastnoise\include\FastNoise.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Drawing.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\GeometryClear.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Optional\GLMSupport\Vector3DGLM.ixx" />
+    <ClCompile Include="Source\Application.ixx" />
+    <ClCompile Include="Source\Clouds\Clouds.ixx" />
+    <ClCompile Include="Source\Clouds\DisplayClouds.ixx" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Memory.ixx" />
     <ClCompile Include="Source\Planet\Display\Display.ixx" />
+    <ClCompile Include="Source\Planet\Display\DisplayDesert.ixx" />
     <ClCompile Include="Source\Planet\Display\DisplayElevation.ixx" />
+    <ClCompile Include="Source\Planet\Display\DisplayIce.ixx" />
     <ClCompile Include="Source\Planet\Display\DisplayPrecipitation.ixx" />
     <ClCompile Include="Source\Planet\Display\DisplayTemperature.ixx" />
+    <ClCompile Include="Source\Planet\Display\DisplayWaterway.cpp" />
+    <ClCompile Include="Source\Planet\Display\DisplayWaterway.ixx" />
+    <ClCompile Include="Source\Planet\Planet.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
