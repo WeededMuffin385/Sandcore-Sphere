@@ -1,3 +1,5 @@
 #ignore compilation files
 **/x64
 **/.vs
+
+*.png

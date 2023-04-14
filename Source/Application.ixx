@@ -46,18 +46,17 @@ export namespace Sandcore {
 	class Application {
 	public:
 		Application() : window(width, height, "Sandcore Sphere"),
-			programBorder("C:/Users/Mi/Documents/GitHub/Sandcore-Multimedia/Userdata/Shaders/ShaderObject") ,
-			programPlanet("C:/Users/Mi/Documents/GitHub/Sandcore-Multimedia/Userdata/Shaders/ShaderPlanet") ,
-			programClouds("C:/Users/Mi/Documents/GitHub/Sandcore-Multimedia/Userdata/Shaders/ShaderClouds") {
+			programBorder("C:/Users/Mi/Documents/GitHub/Sandcore-Sphere/Userdata/Shaders/ShaderObject") ,
+			programPlanet("C:/Users/Mi/Documents/GitHub/Sandcore-Sphere/Userdata/Shaders/ShaderPlanet") ,
+			programClouds("C:/Users/Mi/Documents/GitHub/Sandcore-Sphere/Userdata/Shaders/ShaderClouds") {
 
 			debugInit();
 			glEnable(GL_CULL_FACE);
+
 			glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
-
-			glEnable(GL_DEPTH_TEST);
 
 			generateSphereMesh();
 			camera.setSpeed(1);
@@ -84,10 +83,17 @@ export namespace Sandcore {
 		void draw() {
 			window.clear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1);
 			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+			glEnable(GL_DEPTH_TEST);
 			window.draw(mesh, programPlanet, texture);
-			glDisable(GL_CULL_FACE);
-			window.draw(mesh, programClouds, clouds.getTexture());
-			glEnable(GL_CULL_FACE);
+			if (cloud) {
+				window.draw(mesh, programClouds, clouds.getTexture());
+				glFrontFace(GL_CW);
+				window.draw(mesh, programClouds, clouds.getTexture());
+				glFrontFace(GL_CCW);
+			}
+			glDisable(GL_DEPTH_TEST);
+
 			if (border) {
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 				window.draw(mesh, programBorder, texture);
@@ -127,6 +133,10 @@ export namespace Sandcore {
 						border = !border;
 					}
 
+					if (event.key.key == GLFW_KEY_C) {
+						cloud = !cloud;
+					}
+
 					if (!inProcess) {
 						if (event.key.key == GLFW_KEY_COMMA) { // left
 							if (planet.get() == nullptr) {
@@ -162,6 +172,8 @@ export namespace Sandcore {
 			if (generated) {
 				if (thread.joinable()) thread.join();
 				texture.loadFromFile(std::filesystem::current_path() / "Userdata/Planet");
+				elevation.loadFromFile(std::filesystem::current_path() / "Userdata/Elevation");
+				elevation.bind(1);
 				generated = false;
 				inProcess = false;
 			}
@@ -171,6 +183,7 @@ export namespace Sandcore {
 			window.setViewport(width, height);
 
 			auto model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+			model = glm::scale(model, glm::vec3(5.f, 5.f, 5.f));
 			model = foo(model, angle, glm::vec3(0, 0, 1));
 
 			clock.restart();
@@ -189,7 +202,10 @@ export namespace Sandcore {
 			programPlanet.setMat4("view", view);
 			programPlanet.setMat4("proj", proj);
 
+			model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 			model = glm::scale(model, glm::vec3(1.05f, 1.05f, 1.05f));
+			model = glm::scale(model, glm::vec3(5.f, 5.f, 5.f));
+			model = foo(model, angle * 0.5, glm::vec3(0, 0, 1));
 
 			programClouds.setMat4("model", model);
 			programClouds.setMat4("view", view);
@@ -236,6 +252,7 @@ export namespace Sandcore {
 		Program programClouds;
 
 		TextureCubemap texture;
+		TextureCubemap elevation;
 
 		std::unique_ptr<Planet> planet;
 		std::atomic<bool> generated = false;
@@ -252,6 +269,7 @@ export namespace Sandcore {
 		bool control = false;
 		bool rotate = false;
 		bool border = true;
+		bool cloud = false;
 		float angle = 0;
 	};
 }

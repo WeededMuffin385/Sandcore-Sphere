@@ -1,4 +1,8 @@
 module;
+#define GLEW_STATIC
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 #include <filesystem>
 export module Sandcore.Planet.Clouds;
 
@@ -29,6 +33,7 @@ export namespace Sandcore {
 	public:
 		Clouds() : clouds(length) {
 			texture.resize(length);
+			texture.setParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		}
 		
 		void tick() {

@@ -19,8 +19,8 @@ export namespace Sandcore {
 
 			noise.SetNoiseType(FastNoise::NoiseType::SimplexFractal);
 			noise.SetFractalType(FastNoise::FractalType::FBM);
-			noise.SetFractalOctaves(7);
-			noise.SetFrequency(1.75f);
+			noise.SetFractalOctaves(3);
+			noise.SetFrequency(1.0f);
 			noise.SetFractalGain(0.5f);
 		}
 

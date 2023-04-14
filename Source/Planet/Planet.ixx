@@ -31,6 +31,9 @@ export namespace Sandcore {
 			waterway.generate();
 			desert.generate();
 			ice.generate();
+
+
+			elevation.save(std::filesystem::current_path() / "Userdata/Elevation");
 		}
 
 		enum class Type {
