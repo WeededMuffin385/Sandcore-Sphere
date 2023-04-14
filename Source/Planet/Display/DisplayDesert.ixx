@@ -5,11 +5,12 @@ export module Sandcore.Planet.Display.Desert;
 
 import Sandcore.Planet.Display;
 import Sandcore.Planet.Display.Precipitation;
+import Sandcore.Planet.Display.Temperature;
 
 export namespace Sandcore {
 	class DisplayDesert : public Display {
 	public:
-		DisplayDesert(std::size_t length, DisplayPrecipitation& precipitation) : Display(length), precipitation(precipitation) {
+		DisplayDesert(std::size_t length, DisplayPrecipitation& precipitation, DisplayTemperature& temperature) : Display(length), precipitation(precipitation), temperature(temperature) {
 			std::mt19937 random;
 			random.seed(std::random_device()());
 			std::uniform_int_distribution<int> dist(0);
@@ -29,17 +30,20 @@ export namespace Sandcore {
 			auto cart = cubeToCart(u, v, z);
 			double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
 
-			float probability = -precipitation(x, y, z)  * 3 * (0.5 + noiseProbability.GetNoise(cart.x / r, cart.y / r, cart.z / r));//  - length  * spread;
+			float probability = -precipitation(x, y, z) * 3 * (0.5 + noiseProbability.GetNoise(cart.x / r, cart.y / r, cart.z / r));//  - length  * spread;
 
-			if (precipitation(x, y, z) < 0) {
-				if (probability > 0) {
-					if (probability > 1) probability = 1;
-					operator()(x, y, z) = probability;
+			if (temperature(x, y, z) > 0) {
+				if (precipitation(x, y, z) < 0) {
+					if (probability > 0) {
+						if (probability > 1) probability = 1;
+						operator()(x, y, z) = probability;
+					}
 				}
 			}
 		}
 
 		FastNoise noiseProbability;
 		DisplayPrecipitation& precipitation;
+		DisplayTemperature& temperature;
 	};
 }

@@ -20,7 +20,7 @@ export namespace Sandcore {
 	class Planet {
 	public:
 		Planet(std::size_t length) : length(length), elevation(length), precipitation(length, elevation), temperature(length, elevation, precipitation),
-			waterway(length, elevation), desert(length, precipitation), ice(length, temperature) {
+			waterway(length, elevation), desert(length, precipitation, temperature), ice(length, temperature) {
 			generate();
 		}
 
@@ -28,6 +28,7 @@ export namespace Sandcore {
 			elevation.generate();
 			precipitation.generate();
 			temperature.generate();
+
 			waterway.generate();
 			desert.generate();
 			ice.generate();
@@ -75,11 +76,11 @@ export namespace Sandcore {
 		}
 
 		Image::Pixel gradient(Image::Pixel a, Image::Pixel b, float c) {
-			float sr = b.r - a.r;
-			float sg = b.g - a.g;
-			float sb = b.b - a.b;
+			float sr = a.r * (1 - c) + b.r * c;
+			float sg = a.g * (1 - c) + b.g * c;
+			float sb = a.b * (1 - c) + b.b * c;
 
-			return Image::Pixel(a.r + sr * c, a.g + sg * c, a.b + sb * c, 255);
+			return Image::Pixel(sr, sg, sb, 255);
 		}
 
 		void save() {
@@ -92,21 +93,32 @@ export namespace Sandcore {
 				Image(length, length),
 			};
 
+			Image e[6]{
+				Image(std::filesystem::current_path() / "Userdata/Elevation/posx.png"),
+				Image(std::filesystem::current_path() / "Userdata/Elevation/negx.png"),
+
+				Image(std::filesystem::current_path() / "Userdata/Elevation/posy.png"),
+				Image(std::filesystem::current_path() / "Userdata/Elevation/negy.png"),
+
+				Image(std::filesystem::current_path() / "Userdata/Elevation/posz.png"),
+				Image(std::filesystem::current_path() / "Userdata/Elevation/negz.png"),
+			};
+
 			for (int z = 0; z < 6; ++z) {
 				for (int y = 0; y < length; ++y) {
 					for (int x = 0; x < length; ++x) {
-						if (elevation(x, y, z) > 0) cubemap[z](x, y) = Image::Pixel(0, 255, 0, 255);
+						if (elevation(x, y, z) > 0) cubemap[z](x, y) = e[z](x,y);
 						if (elevation(x, y, z) <= 0) cubemap[z](x, y) = Image::Pixel(22, 187, 255, 255);
 
 						if (elevation(x, y, z) > 0) {
 							if (desert(x, y, z) > 0) {
-								cubemap[z](x, y) = gradient(Image::Pixel(0, 255, 0, 255), Image::Pixel(255, 255, 0, 255), desert(x, y, z));
+								cubemap[z](x, y) = gradient(e[z](x, y), Image::Pixel(255, 255, 0, 255), desert(x, y, z));
 							}
 						}
 
 						if (ice(x, y, z) > 0) {
 							if (elevation(x, y, z) > 0) 
-								cubemap[z](x, y) = gradient(Image::Pixel(0, 255, 0, 255), Image::Pixel(255, 255, 255, 255), ice(x, y, z));//Image::Pixel(255 * ice(x, y, z), 255, 255 * ice(x, y, z), 255);
+								cubemap[z](x, y) = gradient(e[z](x, y), Image::Pixel(255, 255, 255, 255), ice(x, y, z));//Image::Pixel(255 * ice(x, y, z), 255, 255 * ice(x, y, z), 255);
 							else 
 								cubemap[z](x, y) = gradient(Image::Pixel(22, 187, 255, 255), Image::Pixel(255, 255, 255, 255), ice(x, y, z));
 						}

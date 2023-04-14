@@ -188,7 +188,7 @@ export namespace Sandcore {
 
 			clock.restart();
 			if (rotate) {
-				angle += clock.getElapsedTime() * 0.3;
+				angle += clock.getElapsedTime() * 0.15;
 			}
 
 			auto view = camera.getViewMatrix();
