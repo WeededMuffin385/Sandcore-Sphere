@@ -1,5 +1,4 @@
 #include <filesystem>
-
 import Sandcore.Application;
 
 using namespace Sandcore;

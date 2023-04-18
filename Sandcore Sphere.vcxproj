@@ -165,7 +165,7 @@
     <ClCompile Include="..\Sandcore\Engine\Graphics\Program\Shader.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture2D.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture3D.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture2DArray.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\TextureCubemap.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Vertex\Vertex.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.cpp" />
@@ -174,11 +174,12 @@
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Libraries\fastnoise\include\FastNoise.cpp" />
     <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Drawing.ixx" />
+    <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Gradient.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\GeometryClear.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Optional\GLMSupport\Vector3DGLM.ixx" />
     <ClCompile Include="Source\Application.ixx" />
     <ClCompile Include="Source\Clouds\Clouds.ixx" />
-    <ClCompile Include="Source\Clouds\DisplayClouds.ixx" />
+    <ClCompile Include="Source\Clouds\Display\DisplayClouds.ixx" />
     <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Memory.ixx" />
     <ClCompile Include="Source\Planet\Display\Display.ixx" />

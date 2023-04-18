@@ -4,13 +4,17 @@ module;
 #include <GLFW/glfw3.h>
 
 #include <filesystem>
+#include <thread>
+#include <atomic>
 export module Sandcore.Planet.Clouds;
 
 import Sandcore.Graphics.TextureCubemap;
 
 import Sandcore.Planet.Display.Clouds;
-import Sandcore.Image;
 import Sandcore.Timer;
+
+import Sandcore.Image;
+import Sandcore.Image.Gradient;
 
 export namespace Sandcore {
 	class Clouds {
@@ -20,12 +24,28 @@ export namespace Sandcore {
 			texture.setParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		}
 		
+		~Clouds() {
+			if (thread.joinable()) thread.join();
+		}
+
 		void tick() {
-			if (timer.getElapsedTime() > 1.0/24.0) {
+			if (inProcess) return;
+			if (generated) {
+				for (int z = 0; z < 6; ++z) {
+					texture.loadFromImage(cubemap[z], z);
+				}
+				if (thread.joinable()) thread.join();
+			}
+
+			inProcess = true;
+			thread = std::thread([this] {
 				clouds.time += timer.getElapsedTime() * 0.07;
 				timer.restart();
+
 				generate();
-			}
+				generated = true;
+				inProcess = false;
+			});
 		}
 
 		void generate() {
@@ -34,18 +54,12 @@ export namespace Sandcore {
 				for (int y = 0; y < length; ++y) {
 					for (int x = 0; x < length; ++x) {
 						if (clouds(x, y, z) > 0) {
-							float transparency = 256  * 5 * clouds(x, y, z);
-							if (transparency > 255) transparency = 255;
-							cubemap[z](x, y) = Image::Pixel(255, 255, 255, transparency);
+							cubemap[z](x, y) = gradient(Image::Pixel(255, 255, 255, 0), Image::Pixel(200, 200, 200, 255), 5 * clouds(x, y, z)); //Image::Pixel(195, 195, 195, transparency);
 						} else {
 							cubemap[z](x, y) = Image::Pixel(255, 255, 255, 0);
 						}
 					}
 				}
-			}
-
-			for (int z = 0; z < 6; ++z) {
-				texture.loadFromImage(cubemap[z], z);
 			}
 		}
 
@@ -54,7 +68,7 @@ export namespace Sandcore {
 		}
 
 	protected:
-		std::size_t length = 128;
+		std::size_t length = 196;
 		Image cubemap[6] = {
 			Image(length, length),
 			Image(length, length),
@@ -66,5 +80,9 @@ export namespace Sandcore {
 		Timer timer;
 		TextureCubemap texture;
 		DisplayClouds clouds;
+		std::thread thread;
+
+		std::atomic<bool> inProcess;
+		std::atomic<bool> generated;
 	};
 }

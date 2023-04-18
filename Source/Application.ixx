@@ -14,6 +14,9 @@ module;
 #include <memory>
 #include <thread>
 #include <atomic>
+
+
+#include <iostream>
 export module Sandcore.Application;
 
 import Sandcore.Window;
@@ -21,8 +24,9 @@ import Sandcore.Event;
 
 import Sandcore.Graphics.TextureCubemap;
 import Sandcore.Graphics.Program;
+import Sandcore.Graphics.Vertex;
+import Sandcore.Graphics.Debug;
 import Sandcore.Graphics.Mesh;
-import Sandcore.Vertex;
 
 import Sandcore.Clock;
 import Sandcore.Camera;
@@ -31,14 +35,18 @@ import Sandcore.Geometry.Clear;
 import Sandcore.Planet;
 
 import Sandcore.Planet.Clouds;
-
 import Sandcore.Print;
 
-import Sandcore.Graphics.Debug;
+
+import Sandcore.Planet.Display.Elevation;
 
 namespace Sandcore {
-	auto foo(glm::mat4 mat, float angle, glm::vec3 vec) {
+	auto rot(glm::mat4 mat, float angle, glm::vec3 vec) {
 		return glm::rotate(mat, angle, vec);
+	}
+
+	auto len(glm::vec3 vec) {
+		return glm::length(vec);
 	}
 }
 
@@ -46,9 +54,10 @@ export namespace Sandcore {
 	class Application {
 	public:
 		Application() : window(width, height, "Sandcore Sphere"),
-			programBorder("C:/Users/Mi/Documents/GitHub/Sandcore-Sphere/Userdata/Shaders/ShaderObject") ,
-			programPlanet("C:/Users/Mi/Documents/GitHub/Sandcore-Sphere/Userdata/Shaders/ShaderPlanet") ,
-			programClouds("C:/Users/Mi/Documents/GitHub/Sandcore-Sphere/Userdata/Shaders/ShaderClouds") {
+			programBorder(std::filesystem::current_path() / "Userdata/Shaders/ShaderObject") ,
+			programPlanet(std::filesystem::current_path() / "Userdata/Shaders/ShaderPlanet") ,
+			programClouds(std::filesystem::current_path() / "Userdata/Shaders/ShaderClouds") ,
+			programPlanetCloudless(std::filesystem::current_path() / "Userdata/Shaders/ShaderPlanetCloudless"){
 
 			debugInit();
 			glEnable(GL_CULL_FACE);
@@ -58,8 +67,11 @@ export namespace Sandcore {
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
 
-			generateSphereMesh();
-			camera.setSpeed(1);
+			generateCloudsMesh();
+			clouds.getTexture().bind(1);
+			camera.setSpeed(0.2f);
+			generatePlanet();
+
 		}
 
 		~Application() {
@@ -68,36 +80,49 @@ export namespace Sandcore {
 
 		void loop() {
 			while (window.isOpen()) {
-				input();
-
-				while (window.pollEvent(event)) {
-					events();
-				}
-
-				update();
-				draw();
+				tick();
 			}
 		}
 
+
 	private:
+		void tick() {
+			input();
+
+			while (window.pollEvent(event)) {
+				events();
+			}
+
+			update();
+			draw();
+		}
+
 		void draw() {
 			window.clear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1);
-			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-			glEnable(GL_DEPTH_TEST);
-			window.draw(mesh, programPlanet, texture);
+			std::print("len: {}\n", len(camera.getPosition()));
+
+			if (len(camera.getPosition()) < 1.5) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
+
 			if (cloud) {
-				window.draw(mesh, programClouds, clouds.getTexture());
 				glFrontFace(GL_CW);
-				window.draw(mesh, programClouds, clouds.getTexture());
+				window.draw(cloudsMesh, programClouds, clouds.getTexture());
 				glFrontFace(GL_CCW);
+				window.draw(planetMesh, programPlanet, texture);
+				window.draw(cloudsMesh, programClouds, clouds.getTexture());
+			} else {
+				glFrontFace(GL_CCW);
+				window.draw(planetMesh, programPlanetCloudless, texture);
 			}
-			glDisable(GL_DEPTH_TEST);
 
 			if (border) {
+				glDisable(GL_DEPTH_TEST);
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-				window.draw(mesh, programBorder, texture);
+				window.draw(cloudsMesh, programBorder, texture);
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+				glEnable(GL_DEPTH_TEST);
 			}
+
 			window.display();
 		}
 
@@ -118,10 +143,7 @@ export namespace Sandcore {
 					}
 
 					if (event.key.key == GLFW_KEY_G) {
-						if (!inProcess) {
-							inProcess = true;
-							thread = std::thread([this] {generatePlanet(); });
-						}
+						generatePlanet();
 					}
 
 					if (event.key.key == GLFW_KEY_R) {
@@ -172,8 +194,7 @@ export namespace Sandcore {
 			if (generated) {
 				if (thread.joinable()) thread.join();
 				texture.loadFromFile(std::filesystem::current_path() / "Userdata/Planet");
-				elevation.loadFromFile(std::filesystem::current_path() / "Userdata/Elevation");
-				elevation.bind(1);
+				generatePlanetMesh();
 				generated = false;
 				inProcess = false;
 			}
@@ -183,8 +204,7 @@ export namespace Sandcore {
 			window.setViewport(width, height);
 
 			auto model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-			model = glm::scale(model, glm::vec3(5.f, 5.f, 5.f));
-			model = foo(model, angle, glm::vec3(0, 0, 1));
+			model = rot(model, angle, glm::vec3(0, 0, 1));
 
 			clock.restart();
 			if (rotate) {
@@ -202,34 +222,69 @@ export namespace Sandcore {
 			programPlanet.setMat4("view", view);
 			programPlanet.setMat4("proj", proj);
 
+			programPlanetCloudless.setMat4("model", model);
+			programPlanetCloudless.setMat4("view", view);
+			programPlanetCloudless.setMat4("proj", proj);
+
 			model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 			model = glm::scale(model, glm::vec3(1.05f, 1.05f, 1.05f));
-			model = glm::scale(model, glm::vec3(5.f, 5.f, 5.f));
-			model = foo(model, angle * 0.5, glm::vec3(0, 0, 1));
+			model = rot(model, angle * 0.5, glm::vec3(0, 0, 1));
+			programPlanet.setMat4("shadowModel", model);
 
 			programClouds.setMat4("model", model);
 			programClouds.setMat4("view", view);
 			programClouds.setMat4("proj", proj);
 		}
 
-		void generateSphereMesh() {
+		void generateCloudsMesh() {
 			std::vector<glm::vec3> vertices;
 			std::vector<Triangle> triangles;
 			icosphere(vertices, triangles, 6);
 
-			for (auto& vertex : vertices) mesh.vertices.push_back(vertex);
+			cloudsMesh.clear();
+
+			for (auto& vertex : vertices) cloudsMesh.vertices.push_back(vertex);
 			for (auto& triangle : triangles) {
-				mesh.indices.push_back(triangle.a);
-				mesh.indices.push_back(triangle.b);
-				mesh.indices.push_back(triangle.c);
+				cloudsMesh.indices.push_back(triangle.a);
+				cloudsMesh.indices.push_back(triangle.b);
+				cloudsMesh.indices.push_back(triangle.c);
 			}
-			mesh.update();
+			cloudsMesh.update();
+		}
+
+		void generatePlanetMesh() {
+			std::vector<glm::vec3> vertices;
+			std::vector<Triangle> triangles;
+			icosphere(vertices, triangles, 6);
+
+			planetMesh.clear();
+
+			if (planet) {
+				for (auto& vertex : vertices) {
+					float h = planet->elevation.noiseContinental.GetNoise(vertex.x, vertex.y, vertex.z);
+					if (h > 0) h = 1 + h * 0.065; else h = 1;
+					vertex *= h;
+				}
+			}
+
+			for (auto& vertex : vertices) planetMesh.vertices.push_back(vertex);
+			for (auto& triangle : triangles) {
+				planetMesh.indices.push_back(triangle.a);
+				planetMesh.indices.push_back(triangle.b);
+				planetMesh.indices.push_back(triangle.c);
+			}
+			planetMesh.update();
 		}
 
 		void generatePlanet() {
-			planet = std::unique_ptr<Planet>(new Planet(size));
-			planet->save(display);
-			generated = true;
+			if (inProcess) return;
+
+			inProcess = true;
+			thread = std::thread([this] {
+				planet = std::unique_ptr<Planet>(new Planet(size));
+				planet->save(display);
+				generated = true;
+			});
 		}
 
 		void generateDisplay() {
@@ -239,28 +294,29 @@ export namespace Sandcore {
 			generated = true;
 		}
 
-		int width = 700;
-		int height = 700;
+		int width = 800;
+		int height = 800;
 		std::size_t size = 512;
 
 		Window window;
 		Event event;
 
-		Mesh<Vertex<glm::vec3>> mesh;
+		Mesh<Vertex<glm::vec3>> planetMesh;
+		Mesh<Vertex<glm::vec3>> cloudsMesh;
 		Program programBorder;
-		Program programPlanet;
 		Program programClouds;
+		Program programPlanet;
+		Program programPlanetCloudless;
 
 		TextureCubemap texture;
-		TextureCubemap elevation;
 
+		Clouds clouds;
 		std::unique_ptr<Planet> planet;
 		std::atomic<bool> generated = false;
 		std::atomic<bool> inProcess = false;
 		std::thread thread;
-		Planet::Type display = Planet::Type::Elevation;
+		Planet::Type display = Planet::Type::Everything;
 		
-		Clouds clouds;
 
 
 		Clock clock;
@@ -268,8 +324,8 @@ export namespace Sandcore {
 
 		bool control = false;
 		bool rotate = false;
-		bool border = true;
-		bool cloud = false;
+		bool border = false;
+		bool cloud = true;
 		float angle = 0;
 	};
 }

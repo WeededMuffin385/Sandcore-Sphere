@@ -30,7 +30,7 @@ export namespace Sandcore {
 			auto cart = cubeToCart(u, v, z);
 			double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
 
-			float probability = -precipitation(x, y, z) * 3 * (0.5 + noiseProbability.GetNoise(cart.x / r, cart.y / r, cart.z / r));//  - length  * spread;
+			float probability = -precipitation(x, y, z) * 2 * (0.5 + noiseProbability.GetNoise(cart.x / r, cart.y / r, cart.z / r));//  - length  * spread;
 
 			if (temperature(x, y, z) > 0) {
 				if (precipitation(x, y, z) < 0) {

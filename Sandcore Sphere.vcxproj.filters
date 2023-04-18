@@ -75,9 +75,6 @@
     <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture2D.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture3D.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\TextureCubemap.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -100,9 +97,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Graphics\Canvas\Canvas.ixx">
@@ -150,10 +144,19 @@
     <ClCompile Include="Source\Clouds\Clouds.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Clouds\DisplayClouds.ixx">
+    <ClCompile Include="Source\Clouds\Display\DisplayClouds.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Common\Timer\Timer.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Gradient.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture2DArray.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
