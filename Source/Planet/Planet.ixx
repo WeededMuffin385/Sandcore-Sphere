@@ -54,19 +54,15 @@ export namespace Sandcore {
 			switch (type) {
 			case Type::Elevation:
 				elevation.save(path);
-				elevation.showExtremum();
 				break;
 			case Type::Ice:
 				ice.save(path);
-				ice.showExtremum();
 				break;
 			case Type::Precipitation:
 				precipitation.save(path);
-				precipitation.showExtremum();
 				break;
 			case Type::Temperature:
 				temperature.save(path);
-				temperature.showExtremum();
 				break;
 			case Type::Desert:
 				desert.save(path);

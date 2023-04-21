@@ -100,9 +100,7 @@ export namespace Sandcore {
 		void draw() {
 			window.clear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1);
 
-			std::print("len: {}\n", len(camera.getPosition()));
-
-			if (len(camera.getPosition()) < 1.5) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
+			if (len(camera.getPosition()) < 15) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
 
 			if (cloud) {
 				glFrontFace(GL_CW);
@@ -134,6 +132,18 @@ export namespace Sandcore {
 		}
 
 		void events() {
+			if (event.type == Event::Type::Scroll) {
+				if (event.scroll.y > 0) {
+					speed *= 1.25;
+				}
+
+				if (event.scroll.y < 0) {
+					speed /= 1.25;
+				}
+				camera.setSpeed(speed);
+
+			}
+
 			if (event.type == Event::Type::Key) {
 				if (event.key.action == GLFW_PRESS) {
 					if (event.key.key == GLFW_KEY_I) {
@@ -290,7 +300,6 @@ export namespace Sandcore {
 		void generateDisplay() {
 			planet->save(display);
 			texture.loadFromFile(std::filesystem::current_path() / "Userdata/Planet");
-			std::print("{}\n", (int)display);
 			generated = true;
 		}
 
@@ -318,7 +327,7 @@ export namespace Sandcore {
 		Planet::Type display = Planet::Type::Everything;
 		
 
-
+		double speed = 1;
 		Clock clock;
 		Camera camera;
 

@@ -78,6 +78,9 @@ export namespace Sandcore {
 
 			saveFace(path / "posz.png", Z_POS, min, delta);
 			saveFace(path / "negz.png", Z_NEG, min, delta);
+
+
+			showExtremum();
 		}
 
 	

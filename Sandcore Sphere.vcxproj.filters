@@ -18,9 +18,6 @@
     <ClCompile Include="Source\main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Memory.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Planet\Display\Display.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -141,10 +138,10 @@
     <ClCompile Include="..\Sandcore\Engine\Libraries\fastnoise\include\FastNoise.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Clouds\Clouds.ixx">
+    <ClCompile Include="Source\Planet\Clouds\Clouds.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Clouds\Display\DisplayClouds.ixx">
+    <ClCompile Include="Source\Planet\Clouds\Display\DisplayClouds.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Common\Timer\Timer.ixx">
