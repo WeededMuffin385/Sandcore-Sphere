@@ -174,8 +174,8 @@ export namespace Sandcore {
 							if (planet.get() == nullptr) {
 								std::print("Planet doesn't exists\n");
 							} else {
-								display = Planet::Type((int)display - 1);
-								if ((int)display < 0) display = Planet::Type::Everything;
+								display = Planet::DisplayType((int)display - 1);
+								if ((int)display < 0) display = Planet::DisplayType::Everything;
 
 								inProcess = true;
 								thread = std::thread([this] {generateDisplay(); });
@@ -186,8 +186,8 @@ export namespace Sandcore {
 							if (planet.get() == nullptr) {
 								std::print("Planet doesn't exists\n");
 							} else {
-								display = Planet::Type((int)display + 1);
-								if ((int)display > (int)Planet::Type::Everything) display = Planet::Type::Elevation;
+								display = Planet::DisplayType((int)display + 1);
+								if ((int)display > (int)Planet::DisplayType::Everything) display = Planet::DisplayType::Elevation;
 
 								inProcess = true;
 								thread = std::thread([this] {generateDisplay(); });
@@ -271,7 +271,11 @@ export namespace Sandcore {
 
 			if (planet) {
 				for (auto& vertex : vertices) {
-					float h = planet->elevation.noiseContinental.GetNoise(vertex.x, vertex.y, vertex.z);
+					float continent = planet->elevation.noiseContinental.GetNoise(vertex.x, vertex.y, vertex.z);
+					//float mountain = planet->elevation.noiseMountain.GetNoise(vertex.x, vertex.y, vertex.z);
+					//if ((mountain < 0) || (continent < 0)) mountain = 0; else mountain *= 0.4;
+
+					float h = continent;// +mountain;
 					if (h > 0) h = 1 + h * 0.065; else h = 1;
 					vertex *= h;
 				}
@@ -324,7 +328,7 @@ export namespace Sandcore {
 		std::atomic<bool> generated = false;
 		std::atomic<bool> inProcess = false;
 		std::thread thread;
-		Planet::Type display = Planet::Type::Everything;
+		Planet::DisplayType display = Planet::DisplayType::Everything;
 		
 
 		double speed = 1;

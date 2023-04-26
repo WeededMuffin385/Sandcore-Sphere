@@ -39,7 +39,7 @@ export namespace Sandcore {
 			elevation.save(std::filesystem::current_path() / "Userdata/Elevation");
 		}
 
-		enum class Type {
+		enum class DisplayType {
 			Elevation,
 			Ice,
 			Precipitation,
@@ -48,26 +48,27 @@ export namespace Sandcore {
 			Everything,
 		};
 
-		void save(Type type) {
+		void save(DisplayType type) {
 			std::filesystem::path path = std::filesystem::current_path() / "Userdata/Planet";
 
 			switch (type) {
-			case Type::Elevation:
+			using enum DisplayType;
+			case Elevation:
 				elevation.save(path);
 				break;
-			case Type::Ice:
+			case Ice:
 				ice.save(path);
 				break;
-			case Type::Precipitation:
+			case Precipitation:
 				precipitation.save(path);
 				break;
-			case Type::Temperature:
+			case Temperature:
 				temperature.save(path);
 				break;
-			case Type::Desert:
+			case Desert:
 				desert.save(path);
 				break;
-			case Type::Everything:
+			case Everything:
 				save();
 				break;
 			}
@@ -105,10 +106,7 @@ export namespace Sandcore {
 						}
 
 						if (ice(x, y, z) > 0) {
-							if (elevation(x, y, z) > 0) 
-								cubemap[z](x, y) = gradient(cubemap[z](x, y), Image::Pixel(255, 255, 255, 255), ice(x, y, z));//Image::Pixel(255 * ice(x, y, z), 255, 255 * ice(x, y, z), 255);
-							else 
-								cubemap[z](x, y) = gradient(Image::Pixel(22, 187, 255, 255), Image::Pixel(255, 255, 255, 255), ice(x, y, z));
+							cubemap[z](x, y) = gradient(cubemap[z](x, y), Image::Pixel(255, 255, 255, 255), ice(x, y, z));
 						}
 					}
 				}

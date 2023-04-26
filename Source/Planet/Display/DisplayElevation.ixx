@@ -43,7 +43,13 @@ export namespace Sandcore {
 			double phi = std::acos(cart.z / r);
 
 			float continent = noiseContinental.GetNoise(cart.x / r, cart.y / r, cart.z / r);
-			operator()(x, y, z) = continent;
+			//float mountain = noiseMountain.GetNoise(cart.x / r, cart.y / r, cart.z / r);
+
+
+			//if ((mountain < 0) || (continent < 0)) mountain = 0; else mountain *= 1000;
+
+
+			operator()(x, y, z) = continent;// +mountain;
 		}
 	public:
 		FastNoise noiseContinental;
