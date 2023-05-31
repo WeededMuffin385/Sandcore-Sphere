@@ -15,7 +15,6 @@ module;
 #include <thread>
 #include <atomic>
 
-
 #include <iostream>
 export module Sandcore.Application;
 
@@ -37,18 +36,7 @@ import Sandcore.Planet;
 import Sandcore.Planet.Clouds;
 import Sandcore.Print;
 
-
 import Sandcore.Planet.Display.Elevation;
-
-namespace Sandcore {
-	auto rot(glm::mat4 mat, float angle, glm::vec3 vec) {
-		return glm::rotate(mat, angle, vec);
-	}
-
-	auto len(glm::vec3 vec) {
-		return glm::length(vec);
-	}
-}
 
 export namespace Sandcore {
 	class Application {
@@ -64,14 +52,16 @@ export namespace Sandcore {
 
 			glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
 
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
+
+			window.setClear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1.0);
 
 			generateCloudsMesh();
 			clouds.getTexture().bind(1);
 			camera.setSpeed(0.2f);
+			camera.setPosition(glm::vec3(5, 0, 0));
 			generatePlanet();
-
 		}
 
 		~Application() {
@@ -98,16 +88,16 @@ export namespace Sandcore {
 		}
 
 		void draw() {
-			window.clear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1);
+			window.clear();
 
-			if (len(camera.getPosition()) < 15) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
+			if (glm::length(camera.getPosition()) < 15) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
 
 			if (cloud) {
 				glFrontFace(GL_CW);
-				window.draw(cloudsMesh, programClouds, clouds.getTexture());
+				window.draw(sphereMesh, programClouds, clouds.getTexture());
 				glFrontFace(GL_CCW);
 				window.draw(planetMesh, programPlanet, texture);
-				window.draw(cloudsMesh, programClouds, clouds.getTexture());
+				window.draw(sphereMesh, programClouds, clouds.getTexture());
 			} else {
 				glFrontFace(GL_CCW);
 				window.draw(planetMesh, programPlanetCloudless, texture);
@@ -116,7 +106,8 @@ export namespace Sandcore {
 			if (border) {
 				glDisable(GL_DEPTH_TEST);
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-				window.draw(cloudsMesh, programBorder, texture);
+				programBorder.setVec3("color", glm::vec3(0, 0, 1));
+				window.draw(sphereMesh, programBorder, texture);
 				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 				glEnable(GL_DEPTH_TEST);
 			}
@@ -169,6 +160,16 @@ export namespace Sandcore {
 						cloud = !cloud;
 					}
 
+					if (event.key.key == GLFW_KEY_B) {
+						opaque = !opaque;
+
+						if (opaque) {
+							window.setClear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1.0);
+						} else {
+							window.setClear(0, 0, 0, 0);
+						}
+					}
+
 					if (!inProcess) {
 						if (event.key.key == GLFW_KEY_COMMA) { // left
 							if (planet.get() == nullptr) {
@@ -208,13 +209,14 @@ export namespace Sandcore {
 				generated = false;
 				inProcess = false;
 			}
+			
+			auto size = window.getSize();
+			auto width = size.x, height = size.y;
 
-			width = window.getSize().x;
-			height = window.getSize().y;
 			window.setViewport(width, height);
 
 			auto model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-			model = rot(model, angle, glm::vec3(0, 0, 1));
+			model = glm::rotate(model, angle, glm::vec3(0, 0, 1));
 
 			clock.restart();
 			if (rotate) {
@@ -238,7 +240,8 @@ export namespace Sandcore {
 
 			model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
 			model = glm::scale(model, glm::vec3(1.05f, 1.05f, 1.05f));
-			model = rot(model, angle * 0.5, glm::vec3(0, 0, 1));
+
+			model = glm::rotate(model, angle * 0.5f, glm::vec3(0, 0, 1));
 			programPlanet.setMat4("shadowModel", model);
 
 			programClouds.setMat4("model", model);
@@ -251,15 +254,15 @@ export namespace Sandcore {
 			std::vector<Triangle> triangles;
 			icosphere(vertices, triangles, 6);
 
-			cloudsMesh.clear();
+			sphereMesh.clear();
 
-			for (auto& vertex : vertices) cloudsMesh.vertices.push_back(vertex);
+			for (auto& vertex : vertices) sphereMesh.vertices.push_back(vertex);
 			for (auto& triangle : triangles) {
-				cloudsMesh.indices.push_back(triangle.a);
-				cloudsMesh.indices.push_back(triangle.b);
-				cloudsMesh.indices.push_back(triangle.c);
+				sphereMesh.indices.push_back(triangle.a);
+				sphereMesh.indices.push_back(triangle.b);
+				sphereMesh.indices.push_back(triangle.c);
 			}
-			cloudsMesh.update();
+			sphereMesh.update();
 		}
 
 		void generatePlanetMesh() {
@@ -315,7 +318,7 @@ export namespace Sandcore {
 		Event event;
 
 		Mesh<Vertex<glm::vec3>> planetMesh;
-		Mesh<Vertex<glm::vec3>> cloudsMesh;
+		Mesh<Vertex<glm::vec3>> sphereMesh;
 		Program programBorder;
 		Program programClouds;
 		Program programPlanet;
@@ -338,6 +341,7 @@ export namespace Sandcore {
 		bool control = false;
 		bool rotate = false;
 		bool border = false;
+		bool opaque = true;
 		bool cloud = true;
 		float angle = 0;
 	};

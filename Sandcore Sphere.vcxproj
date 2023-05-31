@@ -146,15 +146,11 @@
     <ClCompile Include="..\Sandcore\Engine\Common\Array\Array2D.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Array\Array3D.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Clock\Clock.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.Implementation.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Print\Print.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Common\Timer\Timer.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector2D.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector2DHash.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector3D.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector3DHash.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.Implementation.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Canvas\Canvas.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Debug\Debug.ixx" />
@@ -168,15 +164,14 @@
     <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture2DArray.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\TextureCubemap.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Vertex\Vertex.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.Implementation.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.cpp" />
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.Implementation.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Libraries\fastnoise\include\FastNoise.cpp" />
     <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Drawing.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Gradient.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\GeometryClear.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Optional\GLMSupport\Vector3DGLM.ixx" />
     <ClCompile Include="Source\Application.ixx" />
     <ClCompile Include="Source\Planet\Clouds\Clouds.ixx" />
     <ClCompile Include="Source\Planet\Clouds\Display\DisplayClouds.ixx" />
@@ -187,8 +182,6 @@
     <ClCompile Include="Source\Planet\Display\DisplayIce.ixx" />
     <ClCompile Include="Source\Planet\Display\DisplayPrecipitation.ixx" />
     <ClCompile Include="Source\Planet\Display\DisplayTemperature.ixx" />
-    <ClCompile Include="Source\Planet\Display\DisplayWaterway.cpp" />
-    <ClCompile Include="Source\Planet\Display\DisplayWaterway.ixx" />
     <ClCompile Include="Source\Planet\Planet.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

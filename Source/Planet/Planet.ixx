@@ -8,7 +8,6 @@ export module Sandcore.Planet;
 import Sandcore.Planet.Display.Precipitation;
 import Sandcore.Planet.Display.Elevation;
 import Sandcore.Planet.Display.Temperature;
-import Sandcore.Planet.Display.Waterway;
 import Sandcore.Planet.Display.Desert;
 import Sandcore.Planet.Display.Ice;
 import Sandcore.Planet.Display;
@@ -22,7 +21,7 @@ export namespace Sandcore {
 	class Planet {
 	public:
 		Planet(std::size_t length) : length(length), elevation(length), precipitation(length, elevation), temperature(length, elevation, precipitation),
-			waterway(length, elevation), desert(length, precipitation, temperature), ice(length, temperature) {
+			desert(length, precipitation, temperature), ice(length, temperature) {
 			generate();
 		}
 
@@ -31,10 +30,8 @@ export namespace Sandcore {
 			precipitation.generate();
 			temperature.generate();
 
-			waterway.generate();
 			desert.generate();
 			ice.generate();
-
 
 			elevation.save(std::filesystem::current_path() / "Userdata/Elevation");
 		}
@@ -69,18 +66,10 @@ export namespace Sandcore {
 				desert.save(path);
 				break;
 			case Everything:
+				std::print("name: Everything | Enjoy The View\n");
 				save();
 				break;
 			}
-		}
-
-		Image::Pixel gradient(Image::Pixel a, Image::Pixel b, float c) {
-			float sr = a.r * (1 - c) + b.r * c;
-			float sg = a.g * (1 - c) + b.g * c;
-			float sb = a.b * (1 - c) + b.b * c;
-			float sa = a.a * (1 - c) + b.a * c;
-
-			return Image::Pixel(sr, sg, sb, sa);
 		}
 
 		void save() {
@@ -118,21 +107,20 @@ export namespace Sandcore {
 				cubemap[z].save(path);
 			};
 
-			saveFace(path / "posx.png", Display::cube_faces::X_POS);
-			saveFace(path / "negx.png", Display::cube_faces::X_NEG);
+			saveFace(path / "posx.png", Display::CubeFace::X_POS);
+			saveFace(path / "negx.png", Display::CubeFace::X_NEG);
 
-			saveFace(path / "posy.png", Display::cube_faces::Y_POS);
-			saveFace(path / "negy.png", Display::cube_faces::Y_NEG);
+			saveFace(path / "posy.png", Display::CubeFace::Y_POS);
+			saveFace(path / "negy.png", Display::CubeFace::Y_NEG);
 
-			saveFace(path / "posz.png", Display::cube_faces::Z_POS);
-			saveFace(path / "negz.png", Display::cube_faces::Z_NEG);
+			saveFace(path / "posz.png", Display::CubeFace::Z_POS);
+			saveFace(path / "negz.png", Display::CubeFace::Z_NEG);
 		}
 
 	private:
 		DisplayElevation elevation;
 		DisplayPrecipitation precipitation;
 		DisplayTemperature temperature;
-		DisplayWaterway waterway;
 		DisplayDesert desert;
 		DisplayIce ice;
 

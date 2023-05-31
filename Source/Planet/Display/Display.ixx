@@ -3,9 +3,10 @@ module;
 #include <limits>
 #include <fstream>
 #include <filesystem>
+
+#include <glm/glm.hpp>
 export module Sandcore.Planet.Display;
 
-import Sandcore.Vector3D;
 import Sandcore.Array2D;
 import Sandcore.Image;
 
@@ -14,7 +15,7 @@ import Sandcore.Print;
 export namespace Sandcore {
 	class Display {
 	public:
-		enum cube_faces { X_POS, X_NEG, Y_POS, Y_NEG, Z_POS, Z_NEG, SIZE };
+		enum CubeFace { X_POS, X_NEG, Y_POS, Y_NEG, Z_POS, Z_NEG, SIZE };
 
 		Display(std::size_t length) : length(length) {
 			for (auto& face : cubemap) {
@@ -89,7 +90,7 @@ export namespace Sandcore {
 		}
 
 	protected:
-		void saveFace(std::filesystem::path path, cube_faces face, float min, float delta) {
+		void saveFace(std::filesystem::path path, CubeFace face, float min, float delta) {
 			Image image(length, length);
 
 			for (int j = 0; j < length; ++j) {
@@ -106,20 +107,20 @@ export namespace Sandcore {
 			image.save(path);
 		}
 
-		Vector3D<double> cubeToCart(double x, double y, int face) {
+		glm::f64vec3 cubeToCart(double x, double y, int face) {
 			switch (face) {
 			case X_POS:
-				return Vector3D<double>{ +1.0, -y, -x };
+				return { +1.0, -y, -x };
 			case X_NEG:
-				return Vector3D<double>{ -1.0, -y, x };
+				return { -1.0, -y, x };
 			case Y_POS:
-				return Vector3D<double>{ x, +1.0, y };
+				return { x, +1.0, y };
 			case Y_NEG:
-				return Vector3D<double>{ x, -1.0, -y };
+				return { x, -1.0, -y };
 			case Z_POS:
-				return Vector3D<double>{ x, -y, +1.0 };
+				return { x, -y, +1.0 };
 			case Z_NEG:
-				return Vector3D<double>{ -x, -y, -1.0 };
+				return { -x, -y, -1.0 };
 			}
 
 			throw std::exception("wrong face!");

@@ -16,36 +16,43 @@ import Sandcore.Timer;
 import Sandcore.Image;
 import Sandcore.Image.Gradient;
 
+import Sandcore.Print;
+
 export namespace Sandcore {
 	class Clouds {
 	public:
 		Clouds() : clouds(length) {
 			texture.resize(length);
 			texture.setParameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+			run = true;
+			generated = false;
+
+			thread = std::thread([this] {
+				while (run) {
+					while (generated); if (!run) [[unlikely]] break;
+					clouds.time += timer.getElapsedTime() * 0.07;
+					timer.restart();
+
+					generate();
+					generated = true;
+				}
+			});
 		}
 		
 		~Clouds() {
+			run = false;
 			if (thread.joinable()) thread.join();
 		}
 
 		void tick() {
-			if (inProcess) return;
 			if (generated) {
 				for (int z = 0; z < 6; ++z) {
 					texture.loadFromImage(cubemap[z], z);
 				}
-				if (thread.joinable()) thread.join();
+				
+				generated = false;
 			}
-
-			inProcess = true;
-			thread = std::thread([this] {
-				clouds.time += timer.getElapsedTime() * 0.07;
-				timer.restart();
-
-				generate();
-				generated = true;
-				inProcess = false;
-			});
 		}
 
 		void generate() {
@@ -82,7 +89,7 @@ export namespace Sandcore {
 		DisplayClouds clouds;
 		std::thread thread;
 
-		std::atomic<bool> inProcess;
+		std::atomic<bool> run;
 		std::atomic<bool> generated;
 	};
 }

@@ -30,25 +30,13 @@
     <ClCompile Include="Source\Planet\Display\DisplayTemperature.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector3D.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector3DHash.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector2D.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Common\Vector\Vector2DHash.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Common\Array\Array2D.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Common\Array\Array3D.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.cpp">
+    <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.Implementation.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.ixx">
@@ -78,13 +66,13 @@
     <ClCompile Include="..\Sandcore\Engine\Graphics\Vertex\Vertex.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.cpp">
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.Implementation.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.cpp">
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.Implementation.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.ixx">
@@ -93,7 +81,7 @@
     <ClCompile Include="..\Sandcore\Engine\Graphics\Framebuffer\Framebuffer.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.cpp">
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.Implementation.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Graphics\Canvas\Canvas.ixx">
@@ -106,9 +94,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Common\Clock\Clock.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Optional\GLMSupport\Vector3DGLM.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Drawing.ixx">
@@ -127,12 +112,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Source\Planet\Display\DisplayDesert.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Planet\Display\DisplayWaterway.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Planet\Display\DisplayWaterway.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Libraries\fastnoise\include\FastNoise.cpp">

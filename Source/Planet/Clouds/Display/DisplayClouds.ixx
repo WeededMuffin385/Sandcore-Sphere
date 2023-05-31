@@ -30,11 +30,9 @@ export namespace Sandcore {
 			double u = ((double)x / length) * 2 - 1;
 			double v = ((double)y / length) * 2 - 1;
 			auto cart = cubeToCart(u, v, z);
-
 			double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
 
-			float continent = noise.GetNoise(cart.x / r, cart.y / r, cart.z / r, time);
-			operator()(x, y, z) = continent;
+			operator()(x, y, z) = noise.GetNoise(cart.x / r, cart.y / r, cart.z / r, time);
 		}
 
 		FastNoise noise;
