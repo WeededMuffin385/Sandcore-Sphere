@@ -171,8 +171,8 @@
     <ClCompile Include="..\Sandcore\Engine\Libraries\fastnoise\include\FastNoise.cpp" />
     <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Drawing.ixx" />
     <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Gradient.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\GeometryClear.ixx" />
     <ClCompile Include="Source\Application.ixx" />
+    <ClCompile Include="Source\Geometry.ixx" />
     <ClCompile Include="Source\Planet\Clouds\Clouds.ixx" />
     <ClCompile Include="Source\Planet\Clouds\Display\DisplayClouds.ixx" />
     <ClCompile Include="Source\main.cpp" />

@@ -99,9 +99,6 @@
     <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Drawing.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Optional\Geometry\GeometryClear.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Planet\Display\DisplayIce.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -133,6 +130,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Geometry.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
