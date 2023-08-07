@@ -36,15 +36,6 @@
     <ClCompile Include="..\Sandcore\Engine\Common\Array\Array3D.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.Implementation.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Common\Image\Image.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Sandcore\Engine\Common\Print\Print.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\Sandcore\Engine\Graphics\Mesh\Mesh.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -133,6 +124,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Source\Geometry.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Sandcore\Engine\Graphics\Image\Image.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>

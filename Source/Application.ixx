@@ -16,6 +16,7 @@ module;
 #include <atomic>
 
 #include <iostream>
+#include <print>
 export module Sandcore.Application;
 
 import Sandcore.Window;
@@ -34,7 +35,6 @@ import Sandcore.Geometry.Clear;
 import Sandcore.Planet;
 
 import Sandcore.Planet.Clouds;
-import Sandcore.Print;
 
 import Sandcore.Planet.Display.Elevation;
 

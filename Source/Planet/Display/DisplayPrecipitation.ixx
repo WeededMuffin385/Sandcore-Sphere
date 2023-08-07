@@ -2,13 +2,12 @@ module;
 #include <stdexcept>
 #include <numbers>
 #include <cmath>
+#include <print>
 export module Sandcore.Planet.Display.Precipitation;
 
 import Sandcore.Planet.Display;
 
 import Sandcore.Planet.Display.Elevation;
-
-import Sandcore.Print;
 
 export namespace Sandcore {
 	class DisplayPrecipitation : public Display {

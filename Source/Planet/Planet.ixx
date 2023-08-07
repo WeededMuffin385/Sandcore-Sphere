@@ -3,6 +3,7 @@ module;
 #include <fstream>
 #include <numbers>
 #include <filesystem>
+#include <print>
 export module Sandcore.Planet;
 
 import Sandcore.Planet.Display.Precipitation;
@@ -14,8 +15,6 @@ import Sandcore.Planet.Display;
 
 import Sandcore.Image;
 import Sandcore.Image.Gradient;
-
-import Sandcore.Print;
 
 export namespace Sandcore {
 	class Planet {

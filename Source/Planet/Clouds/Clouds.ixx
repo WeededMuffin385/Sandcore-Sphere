@@ -6,6 +6,7 @@ module;
 #include <filesystem>
 #include <thread>
 #include <atomic>
+#include <print>
 export module Sandcore.Planet.Clouds;
 
 import Sandcore.Graphics.TextureCubemap;
@@ -15,8 +16,6 @@ import Sandcore.Timer;
 
 import Sandcore.Image;
 import Sandcore.Image.Gradient;
-
-import Sandcore.Print;
 
 export namespace Sandcore {
 	class Clouds {

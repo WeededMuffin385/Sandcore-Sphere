@@ -2,10 +2,10 @@ module;
 #include <FastNoise.h>
 #include <numbers>
 #include <random>
+#include <print>
 export module Sandcore.Planet.Display.Elevation;
 
 import Sandcore.Planet.Display;
-import Sandcore.Print;
 
 export namespace Sandcore {
 	class DisplayElevation : public Display {

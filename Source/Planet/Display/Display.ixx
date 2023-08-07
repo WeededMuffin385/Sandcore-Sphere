@@ -1,16 +1,16 @@
 module;
+#include <glm/glm.hpp>
+
 #include <array>
 #include <limits>
 #include <fstream>
 #include <filesystem>
+#include <print>
 
-#include <glm/glm.hpp>
 export module Sandcore.Planet.Display;
 
 import Sandcore.Array2D;
 import Sandcore.Image;
-
-import Sandcore.Print;
 
 export namespace Sandcore {
 	class Display {
@@ -19,7 +19,7 @@ export namespace Sandcore {
 
 		Display(std::size_t length) : length(length) {
 			for (auto& face : cubemap) {
-				face.create(length, length, 0);
+				face = Array2D(length, length, 0.f);
 			}
 		}
 
