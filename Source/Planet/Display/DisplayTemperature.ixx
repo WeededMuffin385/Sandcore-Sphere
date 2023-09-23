@@ -7,10 +7,10 @@ import Sandcore.Planet.Display;
 import Sandcore.Planet.Display.Elevation;
 import Sandcore.Planet.Display.Precipitation;
 
-export namespace Sandcore {
-	class DisplayTemperature : public DisplayBase {
+export namespace Sphere {
+	class DisplayTemperature : public Display {
 	public:
-		DisplayTemperature(std::size_t length, DisplayElevation& elevation, DisplayPrecipitation& precipitation) : DisplayBase(length), elevation(elevation), precipitation(precipitation) {
+		DisplayTemperature(std::size_t length, DisplayElevation& elevation, DisplayPrecipitation& precipitation) : Display(length), elevation(elevation), precipitation(precipitation) {
 		}
 
 	protected:

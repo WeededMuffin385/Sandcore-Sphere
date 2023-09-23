@@ -6,12 +6,12 @@ import glm;
 import Sandcore.Graphics.Image;
 import Sandcore.Array2D;
 
-export namespace Sandcore {
-	class DisplayBase {
+export namespace Sphere {
+	class Display {
 	public:
 		enum CubeFace { X_POS, X_NEG, Y_POS, Y_NEG, Z_POS, Z_NEG, SIZE };
 
-		DisplayBase(std::size_t length) : length(length) {
+		Display(std::size_t length) : length(length) {
 			for (auto& face : cubemap) {
 				face = Array2D(length, length, 0.f);
 			}
@@ -85,7 +85,7 @@ export namespace Sandcore {
 
 	protected:
 		void saveFace(std::filesystem::path path, CubeFace face, float min, float delta) {
-			Image image(length, length);
+			Sandcore::Image image(length, length);
 
 			for (int j = 0; j < length; ++j) {
 				for (int i = 0; i < length; ++i) {

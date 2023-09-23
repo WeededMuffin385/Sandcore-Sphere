@@ -6,13 +6,13 @@ import std;
 import Sandcore.Planet.Display;
 import Sandcore.Planet.Display.Elevation;
 
-export namespace Sandcore {
-	class DisplayPrecipitation : public DisplayBase {
+export namespace Sphere {
+	class DisplayPrecipitation : public Display {
 	private:
 		int cells = 6;
 		int radius = 4;
 	public:
-		DisplayPrecipitation(int length, DisplayElevation& elevation) : DisplayBase(length), elevation(elevation) {
+		DisplayPrecipitation(int length, DisplayElevation& elevation) : Display(length), elevation(elevation) {
 
 		}
 	protected:

@@ -3,7 +3,7 @@ export module Sandcore.Geometry.Clear;
 import std;
 import glm;
 
-export namespace Sandcore {
+export namespace Sphere {
 	using Index = int;
 
 	struct Triangle {

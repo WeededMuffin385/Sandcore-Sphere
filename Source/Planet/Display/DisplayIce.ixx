@@ -8,10 +8,10 @@ import Sandcore.Planet.Display.Temperature;
 
 import FastNoise;
 
-export namespace Sandcore {
-	class DisplayIce : public DisplayBase {
+export namespace Sphere {
+	class DisplayIce : public Display {
 	public:
-		DisplayIce(std::size_t length, DisplayTemperature& temperature) : DisplayBase(length), temperature(temperature) {
+		DisplayIce(std::size_t length, DisplayTemperature& temperature) : Display(length), temperature(temperature) {
 			std::mt19937 random;
 			random.seed(std::random_device()());
 			std::uniform_int_distribution<int> dist(0);

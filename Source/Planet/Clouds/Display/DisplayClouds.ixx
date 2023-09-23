@@ -6,10 +6,10 @@ import Sandcore.Planet.Display;
 
 import FastNoise;
 
-export namespace Sandcore {
-	class DisplayClouds : public DisplayBase {
+export namespace Sphere {
+	class DisplayClouds : public Display {
 	public:
-		DisplayClouds(std::size_t length) : DisplayBase(length) {
+		DisplayClouds(std::size_t length) : Display(length) {
 			std::mt19937 random;
 			random.seed(std::random_device()());
 			std::uniform_int_distribution<int> dist(0);

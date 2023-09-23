@@ -12,7 +12,7 @@ import Sandcore.Planet.Display;
 import Sandcore.Graphics.Image;
 import Sandcore.Graphics.Image.Gradient;
 
-export namespace Sandcore {
+export namespace Sphere {
 	class Planet {
 	public:
 		Planet(std::size_t length) : length(length), elevation(length), precipitation(length, elevation), temperature(length, elevation, precipitation),
@@ -68,29 +68,29 @@ export namespace Sandcore {
 		}
 
 		void save() {
-			Image cubemap[6] = {
-				Image(length, length),
-				Image(length, length),
-				Image(length, length),
-				Image(length, length),
-				Image(length, length),
-				Image(length, length),
+			Sandcore::Image cubemap[6] = {
+				Sandcore::Image(length, length),
+				Sandcore::Image(length, length),
+				Sandcore::Image(length, length),
+				Sandcore::Image(length, length),
+				Sandcore::Image(length, length),
+				Sandcore::Image(length, length),
 			};
 
 			for (int z = 0; z < 6; ++z) {
 				for (int y = 0; y < length; ++y) {
 					for (int x = 0; x < length; ++x) {
-						if (elevation(x, y, z) > 0) cubemap[z].at(x, y) = gradient(Pixel(0, 255, 100, 255), Pixel(0, 150, 150, 255), elevation(x, y, z));
-						if (elevation(x, y, z) <= 0) cubemap[z].at(x, y) = Pixel(22, 187, 255, 255);
+						if (elevation(x, y, z) > 0) cubemap[z].at(x, y) = Sandcore::gradient(Sandcore::Pixel(0, 255, 100, 255), Sandcore::Pixel(0, 150, 150, 255), elevation(x, y, z));
+						if (elevation(x, y, z) <= 0) cubemap[z].at(x, y) = Sandcore::Pixel(22, 187, 255, 255);
 
 						if (elevation(x, y, z) > 0) {
 							if (desert(x, y, z) > 0) {
-								cubemap[z].at(x, y) = gradient(cubemap[z].at(x, y), Pixel(255, 255, 0, 255), desert(x, y, z));
+								cubemap[z].at(x, y) = gradient(cubemap[z].at(x, y), Sandcore::Pixel(255, 255, 0, 255), desert(x, y, z));
 							}
 						}
 
 						if (ice(x, y, z) > 0) {
-							cubemap[z].at(x, y) = gradient(cubemap[z].at(x, y), Pixel(255, 255, 255, 255), ice(x, y, z));
+							cubemap[z].at(x, y) = gradient(cubemap[z].at(x, y), Sandcore::Pixel(255, 255, 255, 255), ice(x, y, z));
 						}
 					}
 				}
@@ -102,14 +102,14 @@ export namespace Sandcore {
 				cubemap[z].save(path);
 			};
 
-			saveFace(path / "posx.png", DisplayBase::CubeFace::X_POS);
-			saveFace(path / "negx.png", DisplayBase::CubeFace::X_NEG);
+			saveFace(path / "posx.png", Display::CubeFace::X_POS);
+			saveFace(path / "negx.png", Display::CubeFace::X_NEG);
 
-			saveFace(path / "posy.png", DisplayBase::CubeFace::Y_POS);
-			saveFace(path / "negy.png", DisplayBase::CubeFace::Y_NEG);
+			saveFace(path / "posy.png", Display::CubeFace::Y_POS);
+			saveFace(path / "negy.png", Display::CubeFace::Y_NEG);
 
-			saveFace(path / "posz.png", DisplayBase::CubeFace::Z_POS);
-			saveFace(path / "negz.png", DisplayBase::CubeFace::Z_NEG);
+			saveFace(path / "posz.png", Display::CubeFace::Z_POS);
+			saveFace(path / "negz.png", Display::CubeFace::Z_NEG);
 		}
 
 	private:

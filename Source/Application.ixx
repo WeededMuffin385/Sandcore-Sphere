@@ -25,7 +25,7 @@ import Sandcore.Planet.Clouds;
 
 import Sandcore.Planet.Display.Elevation;
 
-export namespace Sandcore {
+export namespace Sphere {
 	class Application {
 	public:
 		Application() : window(width, height, "Sandcore Sphere"),
@@ -34,7 +34,7 @@ export namespace Sandcore {
 			programClouds(std::filesystem::current_path() / "Userdata/Shaders/ShaderClouds") ,
 			programPlanetCloudless(std::filesystem::current_path() / "Userdata/Shaders/ShaderPlanetCloudless"){
 
-			debugInit();
+			Sandcore::debugInit();
 			glEnable(GL_CULL_FACE);
 
 			glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
@@ -46,10 +46,8 @@ export namespace Sandcore {
 			clouds.getTexture().bind(1);
 			camera.setSpeed(0.2f);
 			camera.setPosition(glm::vec3(5, 0, 0));
+			texture.create(1);
 			generatePlanet();
-
-			while (!generated);
-			texture.load(std::filesystem::current_path() / "Userdata/Planet");
 		}
 
 		~Application() {
@@ -114,7 +112,7 @@ export namespace Sandcore {
 		}
 
 		void events() {
-			if (event.type == Event::Type::Scroll) {
+			if (event.type == Sandcore::Event::Type::Scroll) {
 				if (event.scroll.y > 0) {
 					speed *= 1.25;
 				}
@@ -125,7 +123,7 @@ export namespace Sandcore {
 				camera.setSpeed(speed);
 			}
 
-			if (event.type == Event::Type::Key) {
+			if (event.type == Sandcore::Event::Type::Key) {
 				if (event.key.action == GLFW_PRESS) {
 					if (event.key.key == GLFW_KEY_I) {
 						if (!control) window.setCursor(GLFW_CURSOR_DISABLED); else window.setCursor(GLFW_CURSOR_NORMAL);
@@ -297,17 +295,17 @@ export namespace Sandcore {
 		int height = 800;
 		std::size_t size = 512;
 
-		Display window;
-		Event event;
+		Sandcore::Display window;
+		Sandcore::Event event;
 
-		Mesh<glm::vec3> planetMesh;
-		Mesh<glm::vec3> sphereMesh;
-		Program programBorder;
-		Program programClouds;
-		Program programPlanet;
-		Program programPlanetCloudless;
+		Sandcore::Mesh<glm::vec3> planetMesh;
+		Sandcore::Mesh<glm::vec3> sphereMesh;
+		Sandcore::Program programBorder;
+		Sandcore::Program programClouds;
+		Sandcore::Program programPlanet;
+		Sandcore::Program programPlanetCloudless;
 
-		Texture2DCubemap texture;
+		Sandcore::Texture2DCubemap texture;
 
 		Clouds clouds;
 		std::unique_ptr<Planet> planet;
@@ -318,8 +316,8 @@ export namespace Sandcore {
 		
 
 		double speed = 1;
-		Clock clock;
-		Camera camera;
+		Sandcore::Clock clock;
+		Sandcore::Camera camera;
 
 		bool control = false;
 		bool rotate = false;

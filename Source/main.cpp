@@ -1,6 +1,6 @@
 import Sandcore.Application;
 
 int main() {
-	Sandcore::Application app;
+	Sphere::Application app;
 	app.loop();
 }

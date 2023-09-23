@@ -14,7 +14,7 @@ import Sandcore.System.Timer;
 import Sandcore.Graphics.Image;
 import Sandcore.Graphics.Image.Gradient;
 
-export namespace Sandcore {
+export namespace Sphere {
 	class Clouds {
 	public:
 		Clouds() : clouds(length) {
@@ -57,9 +57,9 @@ export namespace Sandcore {
 				for (int y = 0; y < length; ++y) {
 					for (int x = 0; x < length; ++x) {
 						if (clouds(x, y, z) > 0) {
-							cubemap[z].at(x, y) = gradient(Pixel(255, 255, 255, 0), Pixel(200, 200, 200, 255), 5 * clouds(x, y, z)); //Image::Pixel(195, 195, 195, transparency);
+							cubemap[z].at(x, y) = Sandcore::gradient(Sandcore::Pixel(255, 255, 255, 0), Sandcore::Pixel(200, 200, 200, 255), 5 * clouds(x, y, z));
 						} else {
-							cubemap[z].at(x, y) = Pixel(255, 255, 255, 0);
+							cubemap[z].at(x, y) = Sandcore::Pixel(255, 255, 255, 0);
 						}
 					}
 				}
@@ -70,18 +70,18 @@ export namespace Sandcore {
 			return texture;
 		}
 
-	protected:
+	private:
 		std::size_t length = 196;
-		Image cubemap[6] = {
-			Image(length, length),
-			Image(length, length),
-			Image(length, length),
-			Image(length, length),
-			Image(length, length),
-			Image(length, length),
+		Sandcore::Image cubemap[6] = {
+			Sandcore::Image(length, length),
+			Sandcore::Image(length, length),
+			Sandcore::Image(length, length),
+			Sandcore::Image(length, length),
+			Sandcore::Image(length, length),
+			Sandcore::Image(length, length),
 		};
-		Timer timer;
-		Texture2DCubemap texture;
+		Sandcore::Timer timer;
+		Sandcore::Texture2DCubemap texture;
 		DisplayClouds clouds;
 		std::thread thread;
 

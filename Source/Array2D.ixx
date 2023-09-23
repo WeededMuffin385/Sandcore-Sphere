@@ -2,7 +2,7 @@ export module Sandcore.Array2D;
 
 import std;
 
-export namespace Sandcore {
+export namespace Sphere {
 	template<typename T>
 	class Array2D {
 	public:

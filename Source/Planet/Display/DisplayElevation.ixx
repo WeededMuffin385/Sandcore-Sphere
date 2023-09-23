@@ -6,10 +6,10 @@ import Sandcore.Planet.Display;
 
 import FastNoise;
 
-export namespace Sandcore {
-	class DisplayElevation : public DisplayBase {
+export namespace Sphere {
+	class DisplayElevation : public Display {
 	public:
-		DisplayElevation(std::size_t length) : DisplayBase(length) {
+		DisplayElevation(std::size_t length) : Display(length) {
 			std::mt19937 random;
 			random.seed(std::random_device()());
 			std::uniform_int_distribution<int> dist(0);

@@ -34,7 +34,7 @@ import std;
 // Uncomment the line below to use doubles throughout FastNoise instead of floats
 //#define FN_USE_DOUBLES
 
-export namespace Sandcore {
+export namespace Sphere {
 	constexpr auto FN_CELLULAR_INDEX_MAX = 3;
 	using FN_DECIMAL = float;
 	class FastNoise {
