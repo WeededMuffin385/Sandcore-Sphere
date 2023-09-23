@@ -1,16 +1,16 @@
-module;
-#include <FastNoise.h>
-#include <random>
 export module Sandcore.Planet.Display.Desert;
 
+import std;
 import Sandcore.Planet.Display;
 import Sandcore.Planet.Display.Precipitation;
 import Sandcore.Planet.Display.Temperature;
 
+import FastNoise;
+
 export namespace Sandcore {
-	class DisplayDesert : public Display {
+	class DisplayDesert : public DisplayBase {
 	public:
-		DisplayDesert(std::size_t length, DisplayPrecipitation& precipitation, DisplayTemperature& temperature) : Display(length), precipitation(precipitation), temperature(temperature) {
+		DisplayDesert(std::size_t length, DisplayPrecipitation& precipitation, DisplayTemperature& temperature) : DisplayBase(length), precipitation(precipitation), temperature(temperature) {
 			std::mt19937 random;
 			random.seed(std::random_device()());
 			std::uniform_int_distribution<int> dist(0);

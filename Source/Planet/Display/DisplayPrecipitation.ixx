@@ -1,21 +1,18 @@
 module;
-#include <stdexcept>
-#include <numbers>
-#include <cmath>
-#include <print>
 export module Sandcore.Planet.Display.Precipitation;
 
-import Sandcore.Planet.Display;
+import std;
 
+import Sandcore.Planet.Display;
 import Sandcore.Planet.Display.Elevation;
 
 export namespace Sandcore {
-	class DisplayPrecipitation : public Display {
+	class DisplayPrecipitation : public DisplayBase {
 	private:
 		int cells = 6;
 		int radius = 4;
 	public:
-		DisplayPrecipitation(int length, DisplayElevation& elevation) : Display(length), elevation(elevation) {
+		DisplayPrecipitation(int length, DisplayElevation& elevation) : DisplayBase(length), elevation(elevation) {
 
 		}
 	protected:

@@ -1,16 +1,17 @@
 module;
-#include <FastNoise.h>
-#include <cstdlib>
-#include <random>
 export module Sandcore.Planet.Display.Ice;
 
+
+import std;
 import Sandcore.Planet.Display;
 import Sandcore.Planet.Display.Temperature;
 
+import FastNoise;
+
 export namespace Sandcore {
-	class DisplayIce : public Display {
+	class DisplayIce : public DisplayBase {
 	public:
-		DisplayIce(std::size_t length, DisplayTemperature& temperature) : Display(length), temperature(temperature) {
+		DisplayIce(std::size_t length, DisplayTemperature& temperature) : DisplayBase(length), temperature(temperature) {
 			std::mt19937 random;
 			random.seed(std::random_device()());
 			std::uniform_int_distribution<int> dist(0);
@@ -31,7 +32,7 @@ export namespace Sandcore {
 			auto cart = cubeToCart(u, v, z);
 			double r = std::sqrt(cart.x * cart.x + cart.y * cart.y + cart.z * cart.z);
 
-			float probability = abs(temperature(x, y, z)) * 7 * (0.5 + noiseProbability.GetNoise(cart.x / r, cart.y / r, cart.z / r));//  - length  * spread;
+			float probability = std::abs(temperature(x, y, z)) * 7 * (0.5 + noiseProbability.GetNoise(cart.x / r, cart.y / r, cart.z / r));//  - length  * spread;
 
 			if (temperature(x, y, z) < 0)
 			if (probability > 0) {

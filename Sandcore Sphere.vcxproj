@@ -77,12 +77,13 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\stb\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\fastnoise\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glfw\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\stb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BuildStlModules>true</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -95,14 +96,15 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\stb\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\fastnoise\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glfw\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\stb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BuildStlModules>true</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -113,12 +115,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\stb\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\fastnoise\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glfw\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\stb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BuildStlModules>true</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -131,49 +134,48 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\stb\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\fastnoise\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glew\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glfw\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glm\include;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\stb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BuildStlModules>true</BuildStlModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Sandcore\Engine\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glew\lib\Release\x64;C:\Users\Mi\Documents\GitHub\Graphics\Libraries\glfw\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Sandcore\Engine\Common\Array\Array2D.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Common\Array\Array3D.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Common\Clock\Clock.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Common\Timer\Timer.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.Implementation.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Camera\Camera.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Canvas\Canvas.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Debug\Debug.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Drawable\Drawable.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Framebuffer\Framebuffer.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Image\Image.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Mesh\Mesh.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Program\Program.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Program\Shader.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture2D.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\Texture2DArray.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Texture\TextureCubemap.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Vertex\Vertex.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.Implementation.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Event\Event.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.Implementation.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Graphics\Window\Window.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Libraries\fastnoise\include\FastNoise.cpp" />
-    <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Drawing.ixx" />
-    <ClCompile Include="..\Sandcore\Engine\Optional\Drawing\Gradient.ixx" />
+    <ClCompile Include="..\Graphics\Libraries\glm\glm.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Camera.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Canvas.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Debug.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Display.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Framebuffer.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Image.Gradient.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Image.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.Vertex.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Shader.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Array.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Cubemap.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.3D.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.Implementation.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.System.Clock.ixx" />
+    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.System.Timer.ixx" />
+    <ClCompile Include="Libraries\fastnoise\include\FastNoise.cpp" />
+    <ClCompile Include="Libraries\fastnoise\include\FastNoise.ixx" />
     <ClCompile Include="Source\Application.ixx" />
+    <ClCompile Include="Source\Array2D.ixx" />
     <ClCompile Include="Source\Geometry.ixx" />
+    <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Planet\Clouds\Clouds.ixx" />
     <ClCompile Include="Source\Planet\Clouds\Display\DisplayClouds.ixx" />
-    <ClCompile Include="Source\main.cpp" />
     <ClCompile Include="Source\Planet\Display\Display.ixx" />
     <ClCompile Include="Source\Planet\Display\DisplayDesert.ixx" />
     <ClCompile Include="Source\Planet\Display\DisplayElevation.ixx" />
@@ -181,6 +183,9 @@
     <ClCompile Include="Source\Planet\Display\DisplayPrecipitation.ixx" />
     <ClCompile Include="Source\Planet\Display\DisplayTemperature.ixx" />
     <ClCompile Include="Source\Planet\Planet.ixx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Graphics\Source\Graphics\Sandcore.Graphics.OpenGL.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

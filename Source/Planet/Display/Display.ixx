@@ -1,23 +1,17 @@
-module;
-#include <glm/glm.hpp>
-
-#include <array>
-#include <limits>
-#include <fstream>
-#include <filesystem>
-#include <print>
-
 export module Sandcore.Planet.Display;
 
+import std;
+import glm;
+
+import Sandcore.Graphics.Image;
 import Sandcore.Array2D;
-import Sandcore.Image;
 
 export namespace Sandcore {
-	class Display {
+	class DisplayBase {
 	public:
 		enum CubeFace { X_POS, X_NEG, Y_POS, Y_NEG, Z_POS, Z_NEG, SIZE };
 
-		Display(std::size_t length) : length(length) {
+		DisplayBase(std::size_t length) : length(length) {
 			for (auto& face : cubemap) {
 				face = Array2D(length, length, 0.f);
 			}
@@ -100,7 +94,7 @@ export namespace Sandcore {
 					unsigned char maxColor = (255.f / delta) * l;
 					unsigned char minColor = (255.f / delta) * (delta - l);
 
-					image(i, j) = { 0,maxColor,minColor,255 };
+					image.at(i, j) = { 0,maxColor,minColor,255 };
 				}
 			}
 

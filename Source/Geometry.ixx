@@ -1,8 +1,7 @@
-module;
-#include <glm/glm.hpp>
-#include <numbers>
-#include <vector>
 export module Sandcore.Geometry.Clear;
+
+import std;
+import glm;
 
 export namespace Sandcore {
 	using Index = int;

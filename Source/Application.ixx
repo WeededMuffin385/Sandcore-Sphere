@@ -1,35 +1,22 @@
 module;
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
-#include <filesystem>
-#include <fstream>
-#include <cstdlib>
-
-#include <memory>
-#include <thread>
-#include <atomic>
-
-#include <iostream>
-#include <print>
 export module Sandcore.Application;
 
-import Sandcore.Window;
-import Sandcore.Event;
+import std;
+import glm;
 
-import Sandcore.Graphics.TextureCubemap;
-import Sandcore.Graphics.Program;
-import Sandcore.Graphics.Vertex;
+import Sandcore.Graphics.Display;
+import Sandcore.Graphics.Window.Events;
+
+import Sandcore.Graphics.Texture.D2.Cubemap;
+import Sandcore.Graphics.Shader;
 import Sandcore.Graphics.Debug;
 import Sandcore.Graphics.Mesh;
 
-import Sandcore.Clock;
-import Sandcore.Camera;
+import Sandcore.System.Clock;
+import Sandcore.Graphics.Camera;
 
 import Sandcore.Geometry.Clear;
 import Sandcore.Planet;
@@ -55,13 +42,14 @@ export namespace Sandcore {
 			glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
 			glEnable(GL_BLEND);
 
-			window.setClear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1.0);
-
 			generateCloudsMesh();
 			clouds.getTexture().bind(1);
 			camera.setSpeed(0.2f);
 			camera.setPosition(glm::vec3(5, 0, 0));
 			generatePlanet();
+
+			while (!generated);
+			texture.load(std::filesystem::current_path() / "Userdata/Planet");
 		}
 
 		~Application() {
@@ -73,7 +61,6 @@ export namespace Sandcore {
 				tick();
 			}
 		}
-
 
 	private:
 		void tick() {
@@ -88,9 +75,13 @@ export namespace Sandcore {
 		}
 
 		void draw() {
-			window.clear();
+			if (opaque) {
+				window.clear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1.0);
+			} else {
+				window.clear(0, 0, 0, 0);
+			}
 
-			if (glm::length(camera.getPosition()) < 15) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
+			if (glm::gtc::length(camera.getPosition()) < 15) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
 
 			if (cloud) {
 				glFrontFace(GL_CW);
@@ -106,7 +97,7 @@ export namespace Sandcore {
 			if (border) {
 				glDisable(GL_DEPTH_TEST);
 				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-				programBorder.setVec3("color", glm::vec3(0, 0, 1));
+				programBorder.set("color", glm::vec3(0, 0, 1));
 				window.draw(sphereMesh, programBorder, texture);
 				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 				glEnable(GL_DEPTH_TEST);
@@ -132,13 +123,12 @@ export namespace Sandcore {
 					speed /= 1.25;
 				}
 				camera.setSpeed(speed);
-
 			}
 
 			if (event.type == Event::Type::Key) {
 				if (event.key.action == GLFW_PRESS) {
 					if (event.key.key == GLFW_KEY_I) {
-						if (!control) window.toggleCursor(Sandcore::Window::Disabled); else window.toggleCursor(Sandcore::Window::Normal);
+						if (!control) window.setCursor(GLFW_CURSOR_DISABLED); else window.setCursor(GLFW_CURSOR_NORMAL);
 						control = !control;
 						camera.setFirst();
 					}
@@ -162,21 +152,15 @@ export namespace Sandcore {
 
 					if (event.key.key == GLFW_KEY_B) {
 						opaque = !opaque;
-
-						if (opaque) {
-							window.setClear(50.0 / 256, 16.0 / 256, 81.0 / 256, 1.0);
-						} else {
-							window.setClear(0, 0, 0, 0);
-						}
 					}
 
 					if (!inProcess) {
 						if (event.key.key == GLFW_KEY_COMMA) { // left
 							if (planet.get() == nullptr) {
-								std::print("Planet doesn't exists\n");
+								std::cout << "Planet doesn't exists\n";
 							} else {
-								display = Planet::DisplayType((int)display - 1);
-								if ((int)display < 0) display = Planet::DisplayType::Everything;
+								displayType = Planet::DisplayType((int)displayType - 1);
+								if ((int)displayType < 0) displayType = Planet::DisplayType::Everything;
 
 								inProcess = true;
 								thread = std::thread([this] {generateDisplay(); });
@@ -185,10 +169,10 @@ export namespace Sandcore {
 
 						if (event.key.key == GLFW_KEY_PERIOD) { // right
 							if (planet.get() == nullptr) {
-								std::print("Planet doesn't exists\n");
+								std::cout << "Planet doesn't exists\n";
 							} else {
-								display = Planet::DisplayType((int)display + 1);
-								if ((int)display > (int)Planet::DisplayType::Everything) display = Planet::DisplayType::Elevation;
+								displayType = Planet::DisplayType((int)displayType + 1);
+								if ((int)displayType > (int)Planet::DisplayType::Everything) displayType = Planet::DisplayType::Elevation;
 
 								inProcess = true;
 								thread = std::thread([this] {generateDisplay(); });
@@ -204,19 +188,18 @@ export namespace Sandcore {
 
 			if (generated) {
 				if (thread.joinable()) thread.join();
-				texture.loadFromFile(std::filesystem::current_path() / "Userdata/Planet");
+				texture.load(std::filesystem::current_path() / "Userdata/Planet");
 				generatePlanetMesh();
 				generated = false;
 				inProcess = false;
 			}
 			
-			auto size = window.getSize();
-			auto width = size.x, height = size.y;
+			auto [width, height] = window.getSize();
 
 			window.setViewport(width, height);
 
-			auto model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-			model = glm::rotate(model, angle, glm::vec3(0, 0, 1));
+			auto model = glm::gtc::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+			model = glm::gtc::rotate(model, angle, glm::vec3(0, 0, 1));
 
 			clock.restart();
 			if (rotate) {
@@ -226,27 +209,27 @@ export namespace Sandcore {
 			auto view = camera.getViewMatrix();
 			auto proj = camera.getProjMatrix(width, height);
 
-			programBorder.setMat4("model", model);
-			programBorder.setMat4("view", view);
-			programBorder.setMat4("proj", proj);
+			programBorder.set("model", model);
+			programBorder.set("view", view);
+			programBorder.set("proj", proj);
 
-			programPlanet.setMat4("model", model);
-			programPlanet.setMat4("view", view);
-			programPlanet.setMat4("proj", proj);
+			programPlanet.set("model", model);
+			programPlanet.set("view", view);
+			programPlanet.set("proj", proj);
 
-			programPlanetCloudless.setMat4("model", model);
-			programPlanetCloudless.setMat4("view", view);
-			programPlanetCloudless.setMat4("proj", proj);
+			programPlanetCloudless.set("model", model);
+			programPlanetCloudless.set("view", view);
+			programPlanetCloudless.set("proj", proj);
 
-			model = glm::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
-			model = glm::scale(model, glm::vec3(1.05f, 1.05f, 1.05f));
+			model = glm::gtc::translate(glm::mat4(1.0f), glm::vec3(0, 0, 0));
+			model = glm::gtc::scale(model, glm::vec3(1.05f, 1.05f, 1.05f));
 
 			model = glm::rotate(model, angle * 0.5f, glm::vec3(0, 0, 1));
-			programPlanet.setMat4("shadowModel", model);
+			programPlanet.set("shadowModel", model);
 
-			programClouds.setMat4("model", model);
-			programClouds.setMat4("view", view);
-			programClouds.setMat4("proj", proj);
+			programClouds.set("model", model);
+			programClouds.set("view", view);
+			programClouds.set("proj", proj);
 		}
 
 		void generateCloudsMesh() {
@@ -299,14 +282,14 @@ export namespace Sandcore {
 			inProcess = true;
 			thread = std::thread([this] {
 				planet = std::unique_ptr<Planet>(new Planet(size));
-				planet->save(display);
+				planet->save(displayType);
 				generated = true;
 			});
 		}
 
 		void generateDisplay() {
-			planet->save(display);
-			texture.loadFromFile(std::filesystem::current_path() / "Userdata/Planet");
+			planet->save(displayType);
+			texture.load(std::filesystem::current_path() / "Userdata/Planet");
 			generated = true;
 		}
 
@@ -314,24 +297,24 @@ export namespace Sandcore {
 		int height = 800;
 		std::size_t size = 512;
 
-		Window window;
+		Display window;
 		Event event;
 
-		Mesh<Vertex<glm::vec3>> planetMesh;
-		Mesh<Vertex<glm::vec3>> sphereMesh;
+		Mesh<glm::vec3> planetMesh;
+		Mesh<glm::vec3> sphereMesh;
 		Program programBorder;
 		Program programClouds;
 		Program programPlanet;
 		Program programPlanetCloudless;
 
-		TextureCubemap texture;
+		Texture2DCubemap texture;
 
 		Clouds clouds;
 		std::unique_ptr<Planet> planet;
 		std::atomic<bool> generated = false;
 		std::atomic<bool> inProcess = false;
 		std::thread thread;
-		Planet::DisplayType display = Planet::DisplayType::Everything;
+		Planet::DisplayType displayType = Planet::DisplayType::Everything;
 		
 
 		double speed = 1;

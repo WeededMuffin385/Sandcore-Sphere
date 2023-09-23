@@ -1,17 +1,16 @@
 module;
-#include <cstdlib>
-#include <cmath>
-#include <numbers>
 export module Sandcore.Planet.Display.Temperature;
-import Sandcore.Planet.Display;
 
+import std;
+
+import Sandcore.Planet.Display;
 import Sandcore.Planet.Display.Elevation;
 import Sandcore.Planet.Display.Precipitation;
 
 export namespace Sandcore {
-	class DisplayTemperature : public Display {
+	class DisplayTemperature : public DisplayBase {
 	public:
-		DisplayTemperature(std::size_t length, DisplayElevation& elevation, DisplayPrecipitation& precipitation) : Display(length), elevation(elevation), precipitation(precipitation) {
+		DisplayTemperature(std::size_t length, DisplayElevation& elevation, DisplayPrecipitation& precipitation) : DisplayBase(length), elevation(elevation), precipitation(precipitation) {
 		}
 
 	protected:

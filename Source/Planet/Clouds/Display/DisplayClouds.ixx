@@ -1,15 +1,15 @@
 module;
-#include <FastNoise.h>
-#include <cmath>
-#include <random>
 export module Sandcore.Planet.Display.Clouds;
 
+import std;
 import Sandcore.Planet.Display;
 
+import FastNoise;
+
 export namespace Sandcore {
-	class DisplayClouds : public Display {
+	class DisplayClouds : public DisplayBase {
 	public:
-		DisplayClouds(std::size_t length) : Display(length) {
+		DisplayClouds(std::size_t length) : DisplayBase(length) {
 			std::mt19937 random;
 			random.seed(std::random_device()());
 			std::uniform_int_distribution<int> dist(0);

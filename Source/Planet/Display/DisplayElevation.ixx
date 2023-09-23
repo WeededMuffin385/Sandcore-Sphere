@@ -1,16 +1,15 @@
 module;
-#include <FastNoise.h>
-#include <numbers>
-#include <random>
-#include <print>
 export module Sandcore.Planet.Display.Elevation;
 
+import std;
 import Sandcore.Planet.Display;
 
+import FastNoise;
+
 export namespace Sandcore {
-	class DisplayElevation : public Display {
+	class DisplayElevation : public DisplayBase {
 	public:
-		DisplayElevation(std::size_t length) : Display(length) {
+		DisplayElevation(std::size_t length) : DisplayBase(length) {
 			std::mt19937 random;
 			random.seed(std::random_device()());
 			std::uniform_int_distribution<int> dist(0);
