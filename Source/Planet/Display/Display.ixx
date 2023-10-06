@@ -85,7 +85,7 @@ export namespace Sphere {
 
 	protected:
 		void saveFace(std::filesystem::path path, CubeFace face, float min, float delta) {
-			Sandcore::Image image(length, length);
+			Sandcore::Graphics::Image image(length, length);
 
 			for (int j = 0; j < length; ++j) {
 				for (int i = 0; i < length; ++i) {

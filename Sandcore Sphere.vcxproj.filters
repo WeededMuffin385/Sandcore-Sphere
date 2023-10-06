@@ -15,64 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Camera.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Canvas.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Debug.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Display.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Framebuffer.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Image.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.Vertex.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Shader.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Array.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.3D.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.Implementation.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.System.Clock.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.System.Timer.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="..\Graphics\Libraries\glm\glm.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Cubemap.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Libraries\fastnoise\include\FastNoise.ixx">
@@ -111,9 +54,6 @@
     <ClCompile Include="Source\Planet\Clouds\Clouds.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Image.Gradient.ixx">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Planet\Planet.ixx">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -123,9 +63,69 @@
     <ClCompile Include="Source\main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Camera.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Canvas.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Debug.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Display.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Framebuffer.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Image.Gradient.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Image.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.Vertex.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Shader.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Array.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Cubemap.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.3D.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.Implementation.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Window.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.System.Clock.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.System.Timer.ixx">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Graphics\Source\Graphics\Sandcore.Graphics.OpenGL.hpp">
+    <ClInclude Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.OpenGL.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

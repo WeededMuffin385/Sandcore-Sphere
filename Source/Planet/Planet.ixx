@@ -68,29 +68,29 @@ export namespace Sphere {
 		}
 
 		void save() {
-			Sandcore::Image cubemap[6] = {
-				Sandcore::Image(length, length),
-				Sandcore::Image(length, length),
-				Sandcore::Image(length, length),
-				Sandcore::Image(length, length),
-				Sandcore::Image(length, length),
-				Sandcore::Image(length, length),
+			Sandcore::Graphics::Image cubemap[6] = {
+				Sandcore::Graphics::Image(length, length),
+				Sandcore::Graphics::Image(length, length),
+				Sandcore::Graphics::Image(length, length),
+				Sandcore::Graphics::Image(length, length),
+				Sandcore::Graphics::Image(length, length),
+				Sandcore::Graphics::Image(length, length),
 			};
 
 			for (int z = 0; z < 6; ++z) {
 				for (int y = 0; y < length; ++y) {
 					for (int x = 0; x < length; ++x) {
-						if (elevation(x, y, z) > 0) cubemap[z].at(x, y) = Sandcore::gradient(Sandcore::Pixel(0, 255, 100, 255), Sandcore::Pixel(0, 150, 150, 255), elevation(x, y, z));
-						if (elevation(x, y, z) <= 0) cubemap[z].at(x, y) = Sandcore::Pixel(22, 187, 255, 255);
+						if (elevation(x, y, z) > 0) cubemap[z].at(x, y) = Sandcore::Graphics::gradient(Sandcore::Graphics::Pixel(0, 255, 100, 255), Sandcore::Graphics::Pixel(0, 150, 150, 255), elevation(x, y, z));
+						if (elevation(x, y, z) <= 0) cubemap[z].at(x, y) = Sandcore::Graphics::Pixel(22, 187, 255, 255);
 
 						if (elevation(x, y, z) > 0) {
 							if (desert(x, y, z) > 0) {
-								cubemap[z].at(x, y) = gradient(cubemap[z].at(x, y), Sandcore::Pixel(255, 255, 0, 255), desert(x, y, z));
+								cubemap[z].at(x, y) = gradient(cubemap[z].at(x, y), Sandcore::Graphics::Pixel(255, 255, 0, 255), desert(x, y, z));
 							}
 						}
 
 						if (ice(x, y, z) > 0) {
-							cubemap[z].at(x, y) = gradient(cubemap[z].at(x, y), Sandcore::Pixel(255, 255, 255, 255), ice(x, y, z));
+							cubemap[z].at(x, y) = gradient(cubemap[z].at(x, y), Sandcore::Graphics::Pixel(255, 255, 255, 255), ice(x, y, z));
 						}
 					}
 				}

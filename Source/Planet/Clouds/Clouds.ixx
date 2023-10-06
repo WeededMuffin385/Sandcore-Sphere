@@ -26,7 +26,7 @@ export namespace Sphere {
 
 			thread = std::thread([this] {
 				while (run) {
-					while (generated); if (!run) [[unlikely]] break;
+					while (generated && run); if (!run) [[unlikely]] break;
 					clouds.time += timer.getElapsedTime() * 0.07;
 					timer.restart();
 
@@ -57,9 +57,9 @@ export namespace Sphere {
 				for (int y = 0; y < length; ++y) {
 					for (int x = 0; x < length; ++x) {
 						if (clouds(x, y, z) > 0) {
-							cubemap[z].at(x, y) = Sandcore::gradient(Sandcore::Pixel(255, 255, 255, 0), Sandcore::Pixel(200, 200, 200, 255), 5 * clouds(x, y, z));
+							cubemap[z].at(x, y) = Sandcore::Graphics::gradient(Sandcore::Graphics::Pixel(255, 255, 255, 0), Sandcore::Graphics::Pixel(200, 200, 200, 255), 5 * clouds(x, y, z));
 						} else {
-							cubemap[z].at(x, y) = Sandcore::Pixel(255, 255, 255, 0);
+							cubemap[z].at(x, y) = Sandcore::Graphics::Pixel(255, 255, 255, 0);
 						}
 					}
 				}
@@ -72,16 +72,16 @@ export namespace Sphere {
 
 	private:
 		std::size_t length = 196;
-		Sandcore::Image cubemap[6] = {
-			Sandcore::Image(length, length),
-			Sandcore::Image(length, length),
-			Sandcore::Image(length, length),
-			Sandcore::Image(length, length),
-			Sandcore::Image(length, length),
-			Sandcore::Image(length, length),
+		Sandcore::Graphics::Image cubemap[6] = {
+			Sandcore::Graphics::Image(length, length),
+			Sandcore::Graphics::Image(length, length),
+			Sandcore::Graphics::Image(length, length),
+			Sandcore::Graphics::Image(length, length),
+			Sandcore::Graphics::Image(length, length),
+			Sandcore::Graphics::Image(length, length),
 		};
 		Sandcore::Timer timer;
-		Sandcore::Texture2DCubemap texture;
+		Sandcore::Graphics::Texture2DCubemap texture;
 		DisplayClouds clouds;
 		std::thread thread;
 

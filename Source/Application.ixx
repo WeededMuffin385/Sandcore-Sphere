@@ -34,7 +34,7 @@ export namespace Sphere {
 			programClouds(std::filesystem::current_path() / "Userdata/Shaders/ShaderClouds") ,
 			programPlanetCloudless(std::filesystem::current_path() / "Userdata/Shaders/ShaderPlanetCloudless"){
 
-			Sandcore::debugInit();
+			Sandcore::Graphics::debugInit();
 			glEnable(GL_CULL_FACE);
 
 			glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
@@ -79,7 +79,17 @@ export namespace Sphere {
 				window.clear(0, 0, 0, 0);
 			}
 
-			if (glm::gtc::length(camera.getPosition()) < 15) glEnable(GL_DEPTH_TEST); else glDisable(GL_DEPTH_TEST);
+			if (glm::gtc::length(camera.getPosition()) < 15) {
+				if (!depthTest) {
+					glEnable(GL_DEPTH_TEST);
+					depthTest = true;
+				}
+			} else {
+				if (depthTest) {
+					glDisable(GL_DEPTH_TEST);
+					depthTest = false;
+				}
+			}
 
 			if (cloud) {
 				glFrontFace(GL_CW);
@@ -112,7 +122,7 @@ export namespace Sphere {
 		}
 
 		void events() {
-			if (event.type == Sandcore::Event::Type::Scroll) {
+			if (event.type == Sandcore::Graphics::Event::Type::Scroll) {
 				if (event.scroll.y > 0) {
 					speed *= 1.25;
 				}
@@ -123,7 +133,7 @@ export namespace Sphere {
 				camera.setSpeed(speed);
 			}
 
-			if (event.type == Sandcore::Event::Type::Key) {
+			if (event.type == Sandcore::Graphics::Event::Type::Key) {
 				if (event.key.action == GLFW_PRESS) {
 					if (event.key.key == GLFW_KEY_I) {
 						if (!control) window.setCursor(GLFW_CURSOR_DISABLED); else window.setCursor(GLFW_CURSOR_NORMAL);
@@ -295,17 +305,17 @@ export namespace Sphere {
 		int height = 800;
 		std::size_t size = 512;
 
-		Sandcore::Display window;
-		Sandcore::Event event;
+		Sandcore::Graphics::Display window;
+		Sandcore::Graphics::Event event;
 
-		Sandcore::Mesh<glm::vec3> planetMesh;
-		Sandcore::Mesh<glm::vec3> sphereMesh;
-		Sandcore::Program programBorder;
-		Sandcore::Program programClouds;
-		Sandcore::Program programPlanet;
-		Sandcore::Program programPlanetCloudless;
+		Sandcore::Graphics::Mesh<glm::vec3> planetMesh;
+		Sandcore::Graphics::Mesh<glm::vec3> sphereMesh;
+		Sandcore::Graphics::Program programBorder;
+		Sandcore::Graphics::Program programClouds;
+		Sandcore::Graphics::Program programPlanet;
+		Sandcore::Graphics::Program programPlanetCloudless;
 
-		Sandcore::Texture2DCubemap texture;
+		Sandcore::Graphics::Texture2DCubemap texture;
 
 		Clouds clouds;
 		std::unique_ptr<Planet> planet;
@@ -317,8 +327,9 @@ export namespace Sphere {
 
 		double speed = 1;
 		Sandcore::Clock clock;
-		Sandcore::Camera camera;
+		Sandcore::Graphics::Camera camera;
 
+		bool depthTest = false;
 		bool control = false;
 		bool rotate = false;
 		bool border = false;

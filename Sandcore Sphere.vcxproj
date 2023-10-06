@@ -147,27 +147,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Camera.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Canvas.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Debug.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Display.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Framebuffer.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Image.Gradient.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Image.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.Vertex.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Shader.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Array.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Cubemap.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.3D.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Texture.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.Implementation.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.Window.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.System.Clock.ixx" />
+    <ClCompile Include="..\Graphics\Graphics\Source\Graphics\Sandcore.System.Timer.ixx" />
     <ClCompile Include="..\Graphics\Libraries\glm\glm.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Camera.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Canvas.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Debug.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Display.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Framebuffer.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Image.Gradient.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Image.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Mesh.Vertex.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Shader.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Array.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.Cubemap.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.2D.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.3D.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Texture.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.Implementation.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.Events.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.Graphics.Window.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.System.Clock.ixx" />
-    <ClCompile Include="..\Graphics\Source\Graphics\Sandcore.System.Timer.ixx" />
     <ClCompile Include="Libraries\fastnoise\include\FastNoise.cpp" />
     <ClCompile Include="Libraries\fastnoise\include\FastNoise.ixx" />
     <ClCompile Include="Source\Application.ixx" />
@@ -185,7 +185,7 @@
     <ClCompile Include="Source\Planet\Planet.ixx" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Graphics\Source\Graphics\Sandcore.Graphics.OpenGL.hpp" />
+    <ClInclude Include="..\Graphics\Graphics\Source\Graphics\Sandcore.Graphics.OpenGL.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
